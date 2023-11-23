@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblib.a CMakeFiles/lib.dir/Commands.cpp.o CMakeFiles/lib.dir/Environment.cpp.o CMakeFiles/lib.dir/Task.cpp.o
+/usr/bin/ranlib liblib.a

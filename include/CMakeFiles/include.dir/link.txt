@@ -1,0 +1,2 @@
+/usr/bin/ar qc libinclude.a CMakeFiles/include.dir/libconfig/lib/grammar.c.o CMakeFiles/include.dir/libconfig/lib/libconfig.c.o CMakeFiles/include.dir/libconfig/lib/libconfigcpp.c++.o CMakeFiles/include.dir/libconfig/lib/scanctx.c.o CMakeFiles/include.dir/libconfig/lib/scanner.c.o CMakeFiles/include.dir/libconfig/lib/strbuf.c.o CMakeFiles/include.dir/libconfig/lib/strvec.c.o CMakeFiles/include.dir/libconfig/lib/util.c.o CMakeFiles/include.dir/libconfig/lib/wincompat.c.o
+/usr/bin/ranlib libinclude.a

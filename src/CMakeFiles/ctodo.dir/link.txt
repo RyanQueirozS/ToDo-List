@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/ctodo.dir/main.cpp.o -o ctodo  ../lib/liblib.a ../include/libinclude.a libsrc.a 
