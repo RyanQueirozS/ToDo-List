@@ -2,12 +2,13 @@
 #include <string>
 
 #include "../include/libconfig/lib/libconfig.h++"
+#include "Commands.hpp"
 #include "Environment.hpp"
 
 std::string getTaskPathFromConfigFile() {
   libconfig::Config cfg;
   try {
-    cfg.readFile("./doc/config.cfg");
+    cfg.readFile(getCurrentExecutablePath() + "/doc/config.cfg");
   } catch (const libconfig::FileIOException &fioex) {
     std::cout << "I/O error while reading file." << '\n';
     return "ERROR!";

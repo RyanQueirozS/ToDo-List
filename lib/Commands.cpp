@@ -108,27 +108,30 @@ void show_command(CommandParams tokens) {
     std::cout << "Wrong use of command\n";
     return;
   }
-  std::string path = getTaskPathFromConfigFile();
-  std::string fileName = tokens.tokens[1] + ".txt";
-  std::ifstream taskFile(path + fileName);
 
+  std::string line;
+  std::string path = getTaskPathFromConfigFile();
   if (tokens.tokens[1] == "all") {
-    std::string line;
     std::vector<Task> allTasks;
     std::array<std::string, 5> taskFields;
     for (const auto &entry : std::filesystem::directory_iterator(path)) {
-      std::ifstream fileData(entry.path());
-      for(int i = 0; i < fileData.widen
+      std::ifstream taskFile(entry.path());
+      while (std::getline(taskFile, line)) {
+        std::cout << line << "\n";
       }
-      Task newTask(line);
-      allTasks.push_back(newTask);
+      taskFile.close();
     }
+    return;
   }
+
+  std::ifstream taskFile(path + tokens.tokens[1] + ".cfg");
   if (taskFile.is_open()) {
+    while (std::getline(taskFile, line)) {
+      std::cout << line << "\n";
+    }
     taskFile.close();
     return;
   }
-  taskFile.close();
   std::cout << "Wrong use of command\n";
   return;
 }
@@ -141,17 +144,17 @@ void create_command(CommandParams) {
       "Date(DD:MM):\n> ",
       "Description:\n> ",
   };
-  uint id = generateTaskId();
-  if (id == 2147483647) {
-    return;
-  }
+  uint id = generateTaskID();
 
+  if (id == 2147483647) {  // This is just a way to get a invalid ID, check the
+    return;                // generateTaskID function
+  }
   for (int i = 0; i < 4; i++) {
     std::cout << "Enter the Task's " << textArray[i];
     std::cin >> taskObjectsArray[i];
   }
-  Task task(taskObjectsArray[0], generateTaskId(), taskObjectsArray[1],
-            taskObjectsArray[2], taskObjectsArray[3]);
+  Task task(taskObjectsArray[0], id, taskObjectsArray[1], taskObjectsArray[2],
+            taskObjectsArray[3]);
 }
 
 void executeCommands() {

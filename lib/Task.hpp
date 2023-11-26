@@ -23,7 +23,6 @@ class Task {
 
  private:
   void saveTask();
-  std::array<std::string, 5> getObjectsAsVector();
 };
 
-unsigned int generateTaskId();
+unsigned int generateTaskID();

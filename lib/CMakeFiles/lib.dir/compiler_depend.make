@@ -259,6 +259,7 @@ lib/CMakeFiles/lib.dir/Commands.cpp.o: lib/Commands.cpp \
 
 lib/CMakeFiles/lib.dir/Environment.cpp.o: lib/Environment.cpp \
   include/libconfig/lib/libconfig.h++ \
+  lib/Commands.hpp \
   lib/Environment.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -366,12 +367,15 @@ lib/CMakeFiles/lib.dir/Environment.cpp.o: lib/Environment.cpp \
   /usr/include/c++/13.2.1/bits/requires_hosted.h \
   /usr/include/c++/13.2.1/bits/std_abs.h \
   /usr/include/c++/13.2.1/bits/stl_algobase.h \
+  /usr/include/c++/13.2.1/bits/stl_bvector.h \
   /usr/include/c++/13.2.1/bits/stl_construct.h \
   /usr/include/c++/13.2.1/bits/stl_function.h \
   /usr/include/c++/13.2.1/bits/stl_iterator.h \
   /usr/include/c++/13.2.1/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13.2.1/bits/stl_iterator_base_types.h \
   /usr/include/c++/13.2.1/bits/stl_pair.h \
+  /usr/include/c++/13.2.1/bits/stl_uninitialized.h \
+  /usr/include/c++/13.2.1/bits/stl_vector.h \
   /usr/include/c++/13.2.1/bits/streambuf.tcc \
   /usr/include/c++/13.2.1/bits/streambuf_iterator.h \
   /usr/include/c++/13.2.1/bits/string_view.tcc \
@@ -379,6 +383,7 @@ lib/CMakeFiles/lib.dir/Environment.cpp.o: lib/Environment.cpp \
   /usr/include/c++/13.2.1/bits/uses_allocator.h \
   /usr/include/c++/13.2.1/bits/uses_allocator_args.h \
   /usr/include/c++/13.2.1/bits/utility.h \
+  /usr/include/c++/13.2.1/bits/vector.tcc \
   /usr/include/c++/13.2.1/cctype \
   /usr/include/c++/13.2.1/cerrno \
   /usr/include/c++/13.2.1/clocale \
@@ -411,6 +416,7 @@ lib/CMakeFiles/lib.dir/Environment.cpp.o: lib/Environment.cpp \
   /usr/include/c++/13.2.1/tuple \
   /usr/include/c++/13.2.1/type_traits \
   /usr/include/c++/13.2.1/typeinfo \
+  /usr/include/c++/13.2.1/vector \
   /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
   /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
   /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -447,6 +453,7 @@ lib/CMakeFiles/lib.dir/Environment.cpp.o: lib/Environment.cpp \
   /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h
 
 lib/CMakeFiles/lib.dir/Task.cpp.o: lib/Task.cpp \
+  include/libconfig/lib/libconfig.h++ \
   lib/Commands.hpp \
   lib/Environment.hpp \
   lib/Task.hpp \
