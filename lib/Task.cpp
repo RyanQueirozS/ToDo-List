@@ -40,7 +40,8 @@ uint generateTaskID() {
 
   libconfig::Setting &root = cfg.getRoot();
   if (!root.exists("ID")) {
-    root.add("ID", libconfig::Setting::TypeString);
+    root.add("ID", libconfig::Setting::TypeString) =
+        std::to_string(generatedID);
   }
   generatedID = atoi(root.lookup("ID")) + 1;
   root.remove("ID");
@@ -50,6 +51,7 @@ uint generateTaskID() {
     cfg.writeFile(path);
   } catch (const libconfig::FileIOException &fioex) {
     std::cerr << "I/O error while writing id to file.\n";
+    return 0;
   }
 
   return generatedID;

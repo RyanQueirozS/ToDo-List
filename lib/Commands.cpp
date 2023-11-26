@@ -146,8 +146,8 @@ void create_command(CommandParams) {
   };
   uint id = generateTaskID();
 
-  if (id == 2147483647) {  // This is just a way to get a invalid ID, check the
-    return;                // generateTaskID function
+  if (id == 0) {  // This is just a way to get a invalid ID, check the
+    return;       // generateTaskID function
   }
   for (int i = 0; i < 4; i++) {
     std::cout << "Enter the Task's " << textArray[i];
