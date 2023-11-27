@@ -1,14 +1,11 @@
 
-#include <array>
-#include <cstdint>
-#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <ios>
 #include <iostream>
+#include <libconfig.h++>
 #include <string>
 
-#include "../include/libconfig/lib/libconfig.h++"
 #include "Commands.hpp"
 #include "Environment.hpp"
 #include "Task.hpp"

@@ -238,6 +238,7 @@ lib/CMakeFiles/lib.dir/Commands.cpp.o
  /usr/include/features.h
  /usr/include/gnu/stubs-64.h
  /usr/include/gnu/stubs.h
+ /usr/include/libconfig.h++
  /usr/include/libintl.h
  /usr/include/linux/errno.h
  /usr/include/locale.h
@@ -260,7 +261,6 @@ lib/CMakeFiles/lib.dir/Commands.cpp.o
 
 lib/CMakeFiles/lib.dir/Environment.cpp.o
  /home/ryan/Documents/projects/cpp/ToDo-List/lib/Environment.cpp
- /home/ryan/Documents/projects/cpp/ToDo-List/include/libconfig/lib/libconfig.h++
  /home/ryan/Documents/projects/cpp/ToDo-List/lib/Commands.hpp
  /home/ryan/Documents/projects/cpp/ToDo-List/lib/Environment.hpp
  /usr/include/alloca.h
@@ -437,6 +437,7 @@ lib/CMakeFiles/lib.dir/Environment.cpp.o
  /usr/include/features.h
  /usr/include/gnu/stubs-64.h
  /usr/include/gnu/stubs.h
+ /usr/include/libconfig.h++
  /usr/include/linux/errno.h
  /usr/include/locale.h
  /usr/include/pthread.h
@@ -456,7 +457,6 @@ lib/CMakeFiles/lib.dir/Environment.cpp.o
 
 lib/CMakeFiles/lib.dir/Task.cpp.o
  /home/ryan/Documents/projects/cpp/ToDo-List/lib/Task.cpp
- /home/ryan/Documents/projects/cpp/ToDo-List/include/libconfig/lib/libconfig.h++
  /home/ryan/Documents/projects/cpp/ToDo-List/lib/Commands.hpp
  /home/ryan/Documents/projects/cpp/ToDo-List/lib/Environment.hpp
  /home/ryan/Documents/projects/cpp/ToDo-List/lib/Task.hpp
@@ -670,6 +670,7 @@ lib/CMakeFiles/lib.dir/Task.cpp.o
  /usr/include/features.h
  /usr/include/gnu/stubs-64.h
  /usr/include/gnu/stubs.h
+ /usr/include/libconfig.h++
  /usr/include/libintl.h
  /usr/include/linux/errno.h
  /usr/include/locale.h

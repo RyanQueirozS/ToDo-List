@@ -4,6 +4,7 @@
 #include <functional>
 #include <iostream>
 #include <iterator>
+#include <libconfig.h++>
 #include <map>
 #include <sstream>
 #include <string>
@@ -30,7 +31,13 @@ std::vector<std::string> getUserInput() {
 
   return tokens;
 }
-void taskOutputTemplate(std::vector<Task> taskVector) {}
+void taskOutputTemplate(std::vector<std::array<std::string, 5>> taskVector) {
+  for (auto x : taskVector) {
+    for (auto y : x) {
+      std::cout << y << std::endl;
+    }
+  }
+}
 
 std::string getCurrentExecutablePath() {
 #ifdef _WIN32
@@ -105,22 +112,51 @@ void help_command(CommandParams) {
 
 void show_command(CommandParams tokens) {
   if (tokens.tokens.size() == 1) {
+    // In the future I want to make it display possibilities
     std::cout << "Wrong use of command\n";
     return;
   }
 
   std::string line;
   std::string path = getTaskPathFromConfigFile();
+  std::vector<std::array<std::string, 5>> taskVector;
   if (tokens.tokens[1] == "all") {
     std::vector<Task> allTasks;
     std::array<std::string, 5> taskFields;
+    libconfig::Config cfg;
     for (const auto &entry : std::filesystem::directory_iterator(path)) {
-      std::ifstream taskFile(entry.path());
-      while (std::getline(taskFile, line)) {
-        std::cout << line << "\n";
+      try {
+        cfg.readFile(entry.path());
+      } catch (const libconfig::FileIOException &fioex) {
+        std::cout << "I/O error while reading file.\n";
+        return;
+      } catch (const libconfig::ParseException &pex) {
+        std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
+                  << " - " << pex.getError() << '\n';
+        return;
       }
-      taskFile.close();
+      libconfig::Setting &root = cfg.getRoot();
+      if (!root.exists("Tasks")) {
+        std::cout << "No tasks in Label : " << entry.path() << '\n';
+        return;
+      }
+      libconfig::Setting &tasks = root["Tasks"];
+
+      try {
+        std::array<std::string, 5> taskFieldArray;
+        std::string ID = tasks[0].lookup("ID");
+        std::string name = tasks[0].lookup("name");
+        std::string dueDate = tasks[0].lookup("dueDate");
+        std::string description = tasks[0].lookup("description");
+        taskFieldArray = {ID, name, dueDate, description};
+        taskVector.push_back(taskFieldArray);
+
+      } catch (const libconfig::SettingNotFoundException &nfex) {
+        std::cerr << "Didn't find Tasks\n";
+        return;
+      }
     }
+    taskOutputTemplate(taskVector);
     return;
   }
 

@@ -1,5 +1,18 @@
 cmake_minimum_required(VERSION 3.27.7)
 
+#----------------------------------------------
+# Detecting Operating System
+#----------------------------------------------
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  target_compile_definitions(ostest PUBLIC "LINUX_OS")
+endif()
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+  target_compile_definitions(ostest PUBLIC "MACOS_OS")
+endif()
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  target_compile_definitions(ostest PUBLIC "WINDOWS_OS")
+endif()
+
 project(todoc)
 
 set(CMAKE_CXX_STANDART 14)

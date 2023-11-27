@@ -28,7 +28,7 @@ CMAKE_BUILD_TYPE:STRING=
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //CXX compiler
-CMAKE_CXX_COMPILER:STRING=/usr/bin/c++
+CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -54,7 +54,7 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //C compiler
-CMAKE_C_COMPILER:STRING=/usr/bin/cc
+CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -214,21 +214,6 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
-
-//Value Computed by CMake
-ctodo_BINARY_DIR:STATIC=/home/ryan/Documents/projects/cpp/ToDo-List
-
-//Value Computed by CMake
-ctodo_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-ctodo_SOURCE_DIR:STATIC=/home/ryan/Documents/projects/cpp/ToDo-List
-
-//Path to a library.
-libconfig:FILEPATH=libconfig-NOTFOUND
-
-//The directory containing a CMake configuration file for libconfig.
-libconfig_DIR:PATH=/usr/lib/cmake/libconfig
 
 //Value Computed by CMake
 todoc_BINARY_DIR:STATIC=/home/ryan/Documents/projects/cpp/ToDo-List

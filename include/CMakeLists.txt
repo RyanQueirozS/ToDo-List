@@ -4,6 +4,4 @@ file(GLOB includefiles
      "./libconfig/lib/*.h"
      "./libconfig/lib/*.c"
 )
-add_library(include
-  ${includefiles}
-  )
+add_library(include ${includefiles})
