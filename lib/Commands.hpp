@@ -3,28 +3,21 @@
 #include <string>
 #include <vector>
 
-class CommandParams {
- public:
-  std::vector<std::string> tokens;
-
- private:
-};
-
 std::string getCurrentExecutablePath();
 
-void show_command(CommandParams);
+void show_command();
 
-void help_command(CommandParams);
+void help_command();
 
-void searchTasks(CommandParams);
+void searchTasks();
 
-void filterTasks(CommandParams);
+void filterTasks();
 
-void sortTasks(CommandParams);
+void sortTasks();
 
-void create_command(CommandParams);
+void create_command();
 
-void setUserSettings(CommandParams);
+void setUserSettings();
 
 std::vector<std::string> getUserInput();
 

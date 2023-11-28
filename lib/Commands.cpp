@@ -16,12 +16,15 @@
 #include "Environment.hpp"
 #include "Task.hpp"
 
+std::vector<std::string> Tokens;
+
 std::vector<std::string> getUserInput() {
   std::string userInput;
   std::cout << "> ";
   std::getline(std::cin, userInput);
   if (userInput == "") {
     userInput = "null";
+    // Needs fixing
   }
 
   std::stringstream ss(userInput);
@@ -31,12 +34,81 @@ std::vector<std::string> getUserInput() {
 
   return tokens;
 }
-void taskOutputTemplate(std::vector<std::array<std::string, 5>> taskVector) {
-  for (auto x : taskVector) {
-    for (auto y : x) {
-      std::cout << y << std::endl;
+
+struct outputTemplate {
+  void printLine() {
+    std::cout << "+";
+    for (int i = 0; i < 32; i++) {
+      std::cout << "-";
     }
+    std::cout << "+\n";
   }
+
+  void printHeader() {
+    int actualSize = 32;
+
+    std::cout << "|";
+    for (int i = 0; i < actualSize - 5; i++) {
+      std::cout << " ";
+      if (i == (actualSize - 5) / 2) {
+        std::cout << "LABEL";
+      }
+    }
+    std::cout << "|\n";
+  }
+
+  void printTask(std::vector<std::array<std::string, 4>> taskVector) {
+    int actualSize = 32;
+    std::cout << "|"
+              << " ID "
+              << "|"
+              << " Name "
+              << "|"
+              << " Date "
+              << "|"
+              << " Description "
+              << "|\n";
+
+    for (int i = 0; i < taskVector.size(); i++) {
+      printLine();
+      for (int j = 0; j < taskVector[i].size(); j++) {
+        std::cout << "| ";
+        if (j == 0 && taskVector[i][j].size() == 1) {
+          std::cout << " ";
+        }
+        if (j == 1 && taskVector[i][j].size() < 4) {
+          for (int k = 0; k < 4 - taskVector[i][j].size(); k++) {
+            std::cout << " ";
+          }
+        }
+        if (j == 2 && taskVector[i][j].size() < 4) {
+          for (int k = 0; k < 4 - taskVector[i][j].size(); k++) {
+            std::cout << " ";
+          }
+        }
+        if (j == 3 && taskVector[i][j].size() < 11) {
+          for (int k = 0; k < (11 - taskVector[i][j].size()); k++) {
+            std::cout << " ";
+          }
+        }
+        std::cout << taskVector[i][j] << " ";
+      }
+      std::cout << '|';
+      std::cout << '\n';
+    }
+    std::cout << "+";
+    for (int i = 0; i < actualSize; i++) {
+      std::cout << "-";
+    }
+    std::cout << "+\n";
+  }
+};
+void printTemplate(std::vector<std::array<std::string, 4>> taskVector) {
+  outputTemplate _template;
+  _template.printLine();
+  _template.printHeader();
+  _template.printLine();
+  _template.printTask(taskVector);
 }
 
 std::string getCurrentExecutablePath() {
@@ -57,9 +129,9 @@ std::string getCurrentExecutablePath() {
 #endif
 }
 
-void setUserSettings(CommandParams tokens) {
+void setUserSettings() {
   if (std::filesystem::exists(getCurrentExecutablePath() + "/doc/config.cfg") &&
-      tokens.tokens.empty()) {
+      Tokens.empty()) {
     return;
   }
   std::ofstream userEnvFile(getCurrentExecutablePath() + "/doc/config.cfg");
@@ -91,7 +163,7 @@ void setUserSettings(CommandParams tokens) {
   return;
 }
 
-void help_command(CommandParams) {
+void help_command() {
   std::string line;
   std::ifstream helpText;
   std::ifstream cfg;
@@ -110,8 +182,8 @@ void help_command(CommandParams) {
   return;
 }
 
-void show_command(CommandParams tokens) {
-  if (tokens.tokens.size() == 1) {
+void show_command() {
+  if (Tokens.size() == 1) {
     // In the future I want to make it display possibilities
     std::cout << "Wrong use of command\n";
     return;
@@ -119,8 +191,8 @@ void show_command(CommandParams tokens) {
 
   std::string line;
   std::string path = getTaskPathFromConfigFile();
-  std::vector<std::array<std::string, 5>> taskVector;
-  if (tokens.tokens[1] == "all") {
+  std::vector<std::array<std::string, 4>> taskVector;
+  if (Tokens[1] == "all") {
     std::vector<Task> allTasks;
     std::array<std::string, 5> taskFields;
     libconfig::Config cfg;
@@ -143,7 +215,7 @@ void show_command(CommandParams tokens) {
       libconfig::Setting &tasks = root["Tasks"];
 
       try {
-        std::array<std::string, 5> taskFieldArray;
+        std::array<std::string, 4> taskFieldArray;
         std::string ID = tasks[0].lookup("ID");
         std::string name = tasks[0].lookup("name");
         std::string dueDate = tasks[0].lookup("dueDate");
@@ -156,11 +228,11 @@ void show_command(CommandParams tokens) {
         return;
       }
     }
-    taskOutputTemplate(taskVector);
+    printTemplate(taskVector);
     return;
   }
 
-  std::ifstream taskFile(path + tokens.tokens[1] + ".cfg");
+  std::ifstream taskFile(path + Tokens[1] + ".cfg");
   if (taskFile.is_open()) {
     while (std::getline(taskFile, line)) {
       std::cout << line << "\n";
@@ -172,7 +244,7 @@ void show_command(CommandParams tokens) {
   return;
 }
 
-void create_command(CommandParams) {
+void create_command() {
   std::array<std::string, 4> taskObjectsArray;
   std::array<std::string, 4> textArray = {
       "Label:\n> ",
@@ -194,21 +266,18 @@ void create_command(CommandParams) {
 }
 
 void executeCommands() {
-  CommandParams commandParams;
-  setUserSettings(commandParams);
+  setUserSettings();
 
-  std::unordered_map<std::string, std::function<void(const CommandParams)>>
-      commandsMap{
-          {"show", show_command},   {"help", help_command},
-          {"h", help_command},      {"create", create_command},
-          {"set", setUserSettings},
-      };
+  std::unordered_map<std::string, std::function<void()>> commandsMap{
+      {"show", show_command},     {"help", help_command},   {"h", help_command},
+      {"create", create_command}, {"set", setUserSettings},
+  };
 
   while (true) {
-    commandParams.tokens = getUserInput();
-    if (commandsMap.find(commandParams.tokens[0]) != commandsMap.end()) {
-      commandsMap[commandParams.tokens[0]](commandParams);
-      commandParams.tokens = {""};
+    Tokens = getUserInput();
+    if (commandsMap.find(Tokens[0]) != commandsMap.end()) {
+      commandsMap[Tokens[0]]();
     }
+    Tokens.clear();
   }
 }
