@@ -15,7 +15,7 @@ endif()
 
 project(todoc)
 
-set(CMAKE_CXX_STANDART 14)
+set(CMAKE_CXX_STANDART 20)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
