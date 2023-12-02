@@ -5,11 +5,8 @@
 #include <iostream>
 #include <iterator>
 #include <libconfig.h++>
-#include <map>
-#include <sstream>
 #include <string>
 #include <unordered_map>
-#include <utility>
 #include <vector>
 
 #include "Commands.hpp"
@@ -18,266 +15,413 @@
 
 std::vector<std::string> Tokens;
 
-std::vector<std::string> getUserInput() {
-  std::string userInput;
-  std::cout << "> ";
-  std::getline(std::cin, userInput);
-  if (userInput == "") {
-    userInput = "null";
-    // Needs fixing
-  }
+std::vector<std::string> GetUserInput() {
+    std::string userInput;
+    std::cout << "> ";
+    std::getline(std::cin, userInput);
 
-  std::stringstream ss(userInput);
-  std::istream_iterator<std::string> begin(ss);
-  std::istream_iterator<std::string> end;
-  std::vector<std::string> tokens(begin, end);
+    std::stringstream ss(userInput);
+    const std::istream_iterator<std::string> begin(ss);
+    const std::istream_iterator<std::string> end;
+    const std::vector<std::string> tokens(begin, end);
 
-  return tokens;
+    return tokens;
 }
 
 struct outputTemplate {
-  void printLine() {
-    std::cout << "+";
-    for (int i = 0; i < 32; i++) {
-      std::cout << "-";
-    }
-    std::cout << "+\n";
-  }
+    public:
+        void printTasks(
+            const std::vector<std::array<std::string, 4>> taskVector) {
+            if (taskVector.empty()) {
+                PrintHeader();
+                std::cout << "|      Didn't find any tasks     |\n";
+                PrintLine();
+                return;
+            }
+            PrintHeader();
+            std::cout << "|"
+                      << " ID "
+                      << "|"
+                      << " Name "
+                      << "|"
+                      << " Date "
+                      << "|"
+                      << " Description "
+                      << "|\n";
 
-  void printHeader() {
-    int actualSize = 32;
+            for (int i = 0; i < taskVector.size(); i++) {
+                PrintLine();
+                for (int j = 0; j < taskVector[i].size(); j++) {
+                    std::cout << "| ";
+                    if (j == 0 && taskVector[i][j].size() == 1) {
+                        std::cout << " ";
+                    }
+                    if (j == 1 && taskVector[i][j].size() < 4) {
+                        for (int k = 0; k < 4 - taskVector[i][j].size(); k++) {
+                            std::cout << " ";
+                        }
+                    }
+                    if (j == 2 && taskVector[i][j].size() < 4) {
+                        for (int k = 0; k < 4 - taskVector[i][j].size(); k++) {
+                            std::cout << " ";
+                        }
+                    }
+                    if (j == 3 && taskVector[i][j].size() < 11) {
+                        for (int k = 0; k < (11 - taskVector[i][j].size());
+                             k++) {
+                            std::cout << " ";
+                        }
+                    }
+                    std::cout << taskVector[i][j] << " ";
+                }
+                std::cout << '|';
+                std::cout << '\n';
+            }
+            std::cout << "+";
+            for (int i = 0; i < 32; i++) {
+                std::cout << "-";
+            }
+            std::cout << "+\n";
+        }
 
-    std::cout << "|";
-    for (int i = 0; i < actualSize - 5; i++) {
-      std::cout << " ";
-      if (i == (actualSize - 5) / 2) {
-        std::cout << "LABEL";
-      }
-    }
-    std::cout << "|\n";
-  }
+    private:
+        void PrintLine() {
+            std::cout << "+";
+            for (int i = 0; i < 32; i++) {
+                std::cout << "-";
+            }
+            std::cout << "+\n";
+        }
 
-  void printTask(std::vector<std::array<std::string, 4>> taskVector) {
-    int actualSize = 32;
-    std::cout << "|"
-              << " ID "
-              << "|"
-              << " Name "
-              << "|"
-              << " Date "
-              << "|"
-              << " Description "
-              << "|\n";
+        void PrintHeader() {
+            PrintLine();
 
-    for (int i = 0; i < taskVector.size(); i++) {
-      printLine();
-      for (int j = 0; j < taskVector[i].size(); j++) {
-        std::cout << "| ";
-        if (j == 0 && taskVector[i][j].size() == 1) {
-          std::cout << " ";
+            std::cout << "|";
+            for (int i = 0; i < 27; i++) {
+                std::cout << " ";
+                if (i == 27 / 2) {
+                    std::cout << "LABEL";
+                }
+            }
+            std::cout << "|\n";
+            PrintLine();
         }
-        if (j == 1 && taskVector[i][j].size() < 4) {
-          for (int k = 0; k < 4 - taskVector[i][j].size(); k++) {
-            std::cout << " ";
-          }
-        }
-        if (j == 2 && taskVector[i][j].size() < 4) {
-          for (int k = 0; k < 4 - taskVector[i][j].size(); k++) {
-            std::cout << " ";
-          }
-        }
-        if (j == 3 && taskVector[i][j].size() < 11) {
-          for (int k = 0; k < (11 - taskVector[i][j].size()); k++) {
-            std::cout << " ";
-          }
-        }
-        std::cout << taskVector[i][j] << " ";
-      }
-      std::cout << '|';
-      std::cout << '\n';
-    }
-    std::cout << "+";
-    for (int i = 0; i < actualSize; i++) {
-      std::cout << "-";
-    }
-    std::cout << "+\n";
-  }
 };
-void printTemplate(std::vector<std::array<std::string, 4>> taskVector) {
-  outputTemplate _template;
-  _template.printLine();
-  _template.printHeader();
-  _template.printLine();
-  _template.printTask(taskVector);
-}
 
-std::string getCurrentExecutablePath() {
+std::string GetCurrentExecutablePath() {
+    // For the time being this application doesn't work on windows due to the
+    // binaries for cmake and the compiler not existing in the same path as it
+    // is on linux.This function has virtually no value until I fix it.
+
+    // On the future I may fix this, or may simply make it only a linux
+    // aplication and delete this function.
+
 #ifdef _WIN32
 #include <direct.h>
 #include <limits.h>
 
 #include <iostream>
-  char buff[PATH_MAX];
-  _getcwd(buff, PATH_MAX);
-  std::string current_working_dir(buff);
-  return current_working_dir;
+    char buff[PATH_MAX];
+    _getcwd(buff, PATH_MAX);
+    std::string current_working_dir(buff);
+    return current_working_dir;
 #endif
 
 #ifdef linux
 #include <filesystem>
-  return std::filesystem::current_path();
+    return std::filesystem::current_path();
 #endif
 }
 
-void setUserSettings() {
-  if (std::filesystem::exists(getCurrentExecutablePath() + "/doc/config.cfg") &&
-      Tokens.empty()) {
+void cmdSet() {
+    if (std::filesystem::exists(GetCurrentExecutablePath() +
+                                "/doc/config.cfg") &&
+        Tokens.empty()) {
+        return;
+    }
+    std::ofstream userEnvFile(GetCurrentExecutablePath() + "/doc/config.cfg");
+    std::array<std::string, 2> envSettingsArray;
+
+    if (userEnvFile.is_open()) {
+        std::cout << "Your executable path for reference: "
+                  << GetCurrentExecutablePath() << '\n'
+                  << "\nPlease answer to set your environment up:\n"
+                  << "Set Task Path:\n> ";
+        std::cin >> envSettingsArray[0];
+        std::cout << "Set Date Format:\n> ";
+        std::cin >> envSettingsArray[1];
+
+        userEnvFile << "executable_path = \"" << GetCurrentExecutablePath()
+                    << "\"\n"
+                    << "task_path = \"" << envSettingsArray[0] << "\"\n"
+                    << "date_format = \"" << envSettingsArray[1] << "\"\n";
+        userEnvFile.close();
+        return;
+    }
+
+    std::cout << "\n Error trying to create or open config file.\n"
+              << "There is a big chance its caused by the path.\n"
+              << "Verify if the \"doc\" directory exists in \n"
+              << "the project build.\n"
+              << "Run \"set\" command or run the application again\n"
+              << "to try rebuilding the config file\n\n";
     return;
-  }
-  std::ofstream userEnvFile(getCurrentExecutablePath() + "/doc/config.cfg");
-  std::array<std::string, 2> envSettingsArray;
-
-  if (userEnvFile.is_open()) {
-    std::cout << "Your executable path for reference: "
-              << getCurrentExecutablePath() << '\n'
-              << "\nPlease answer to set your environment up:\n"
-              << "Set Task Path:\n> ";
-    std::cin >> envSettingsArray[0];
-    std::cout << "Set Date Format:\n> ";
-    std::cin >> envSettingsArray[1];
-
-    userEnvFile << "executable_path = \"" << getCurrentExecutablePath()
-                << "\"\n"
-                << "task_path = \"" << envSettingsArray[0] << "\"\n"
-                << "date_format = \"" << envSettingsArray[1] << "\"\n";
-    userEnvFile.close();
-    return;
-  }
-
-  std::cout << "\n Error trying to create or open config file.\n"
-            << "There is a big chance its caused by the path.\n"
-            << "Verify if the \"doc\" directory exists in \n"
-            << "the project build.\n"
-            << "Run \"set\" command or run the application again\n"
-            << "to try rebuilding the config file\n\n";
-  return;
 }
 
-void help_command() {
-  std::string line;
-  std::ifstream helpText;
-  std::ifstream cfg;
-  helpText.open("./doc/helpCommand.txt");
+void cmdHelp() {
+    std::string line;
+    std::ifstream helpText;
+    helpText.open("./doc/helpCommand.txt");
 
-  if (helpText.is_open()) {
-    while (std::getline(helpText, line)) {
-      std::cout << line << "\n";
+    if (helpText.is_open()) {
+        while (std::getline(helpText, line)) {
+            std::cout << line << "\n";
+        }
+        helpText.close();
+        return;
     }
+    std::cout << "Unable to display all commands\n"
+              << "Check if \"helpCommand.txt\" exists in the /doc directory\n";
     helpText.close();
     return;
-  }
-  std::cout << "Unable to display all commands\n"
-            << "Check if \"helpCommand.txt\" exists in the /doc directory\n";
-  helpText.close();
-  return;
 }
 
-void show_command() {
-  if (Tokens.size() == 1) {
-    // In the future I want to make it display possibilities
-    std::cout << "Wrong use of command\n";
-    return;
-  }
-
-  std::string line;
-  std::string path = getTaskPathFromConfigFile();
-  std::vector<std::array<std::string, 4>> taskVector;
-  if (Tokens[1] == "all") {
-    std::vector<Task> allTasks;
-    std::array<std::string, 5> taskFields;
+void cmdShow() {
     libconfig::Config cfg;
-    for (const auto &entry : std::filesystem::directory_iterator(path)) {
-      try {
-        cfg.readFile(entry.path());
-      } catch (const libconfig::FileIOException &fioex) {
+    std::string path = GetTaskPathFromConfigFile();
+    std::vector<std::array<std::string, 4>> taskVector;
+    outputTemplate print;
+
+    if (Tokens.size() < 2) {
+        // In the future I want to make it display possibilities
+        std::cout << "Wrong use of command\n";
+        return;
+    }
+
+    if (Tokens[1] == "all") {
+        for (const auto &entry : std::filesystem::directory_iterator(path)) {
+            try {
+                cfg.readFile(entry.path());
+            } catch (const libconfig::FileIOException &fioex) {
+                std::cout << "I/O error while reading file.\n";
+                return;
+            } catch (const libconfig::ParseException &pex) {
+                std::cerr << "Parse error at " << pex.getFile() << ":"
+                          << pex.getLine() << " - " << pex.getError() << '\n';
+                return;
+            }
+            libconfig::Setting &root = cfg.getRoot();
+            if (!root.exists("Tasks")) {
+                std::cout << "No tasks in Label : " << entry.path() << '\n';
+                return;
+            }
+            libconfig::Setting &tasks = root["Tasks"];
+
+            try {
+                std::array<std::string, 4> taskFieldArray;
+                for (int i = 0; i < tasks.getLength(); i++) {
+                    const std::string ID      = tasks[i].lookup("ID");
+                    const std::string name    = tasks[i].lookup("name");
+                    const std::string dueDate = tasks[i].lookup("dueDate");
+                    const std::string description =
+                        tasks[i].lookup("description");
+                    taskFieldArray = {ID, name, dueDate, description};
+                    taskVector.push_back(taskFieldArray);
+                }
+            } catch (const libconfig::SettingNotFoundException &nfex) {
+                std::cerr << "Didn't find Tasks\n";
+                return;
+            }
+        }
+        print.printTasks(taskVector);
+        return;
+    }
+
+    path += Tokens[1] + ".cfg";
+    try {
+        cfg.readFile(path);
+    } catch (const libconfig::FileIOException &fioex) {
         std::cout << "I/O error while reading file.\n";
         return;
-      } catch (const libconfig::ParseException &pex) {
+    } catch (const libconfig::ParseException &pex) {
         std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
                   << " - " << pex.getError() << '\n';
         return;
-      }
-      libconfig::Setting &root = cfg.getRoot();
-      if (!root.exists("Tasks")) {
-        std::cout << "No tasks in Label : " << entry.path() << '\n';
+    }
+    libconfig::Setting &root = cfg.getRoot();
+    if (!root.exists("Tasks")) {
+        std::cout << "No tasks in Label : " << path << '\n';
         return;
-      }
-      libconfig::Setting &tasks = root["Tasks"];
+    }
+    libconfig::Setting &tasks = root["Tasks"];
 
-      try {
+    try {
         std::array<std::string, 4> taskFieldArray;
-        std::string ID = tasks[0].lookup("ID");
-        std::string name = tasks[0].lookup("name");
-        std::string dueDate = tasks[0].lookup("dueDate");
-        std::string description = tasks[0].lookup("description");
-        taskFieldArray = {ID, name, dueDate, description};
-        taskVector.push_back(taskFieldArray);
-
-      } catch (const libconfig::SettingNotFoundException &nfex) {
+        for (int i = 0; i < tasks.getLength(); i++) {
+            const std::string ID          = tasks[i].lookup("ID");
+            const std::string name        = tasks[i].lookup("name");
+            const std::string dueDate     = tasks[i].lookup("dueDate");
+            const std::string description = tasks[i].lookup("description");
+            taskFieldArray                = {ID, name, dueDate, description};
+            taskVector.push_back(taskFieldArray);
+        }
+    } catch (const libconfig::SettingNotFoundException &nfex) {
         std::cerr << "Didn't find Tasks\n";
         return;
-      }
     }
-    printTemplate(taskVector);
+    print.printTasks(taskVector);
     return;
-  }
-
-  std::ifstream taskFile(path + Tokens[1] + ".cfg");
-  if (taskFile.is_open()) {
-    while (std::getline(taskFile, line)) {
-      std::cout << line << "\n";
-    }
-    taskFile.close();
+    std::cout << "Wrong use of command\n";
     return;
-  }
-  std::cout << "Wrong use of command\n";
-  return;
 }
 
-void create_command() {
-  std::array<std::string, 4> taskObjectsArray;
-  std::array<std::string, 4> textArray = {
-      "Label:\n> ",
-      "Name:\n> ",
-      "Date(DD:MM):\n> ",
-      "Description:\n> ",
-  };
-  uint id = generateTaskID();
+void cmdCreate() {
+    std::array<std::string, 4> taskObjectsArray;
+    const std::array<std::string, 4> textArray = {
+        "Label:\n> ",
+        "Name:\n> ",
+        "Date(DD:MM):\n> ",
+        "Description:\n> ",
+    };
+    const uint id = GenerateTaskID();
 
-  if (id == 0) {  // This is just a way to get a invalid ID, check the
-    return;       // generateTaskID function
-  }
-  for (int i = 0; i < 4; i++) {
-    std::cout << "Enter the Task's " << textArray[i];
-    std::cin >> taskObjectsArray[i];
-  }
-  Task task(taskObjectsArray[0], id, taskObjectsArray[1], taskObjectsArray[2],
-            taskObjectsArray[3]);
+    if (id == 0) {  // This is just a way to get a invalid ID, check the
+        return;     // generateTaskID function
+    }
+    for (int i = 0; i < 4; i++) {
+        std::cout << "Enter the Task's " << textArray[i];
+        std::cin >> taskObjectsArray[i];
+    }
+    Task task(taskObjectsArray[0],
+              id,
+              taskObjectsArray[1],
+              taskObjectsArray[2],
+              taskObjectsArray[3]);
+    task.SaveTask();
+}
+void cmdDelete() {
+    if (Tokens.size() < 2) {
+        std::cout << "Wrong use of command\n";
+        return;
+    }
+    std::string path = GetTaskPathFromConfigFile();
+    if (Tokens[1] == "all") {
+        std::string ans;
+        std::cout << "Are you sure you want to delete all tasks?[y/n]\n> ";
+        std::getline(std::cin, ans);
+        if (ans == "y" || ans == "yes") {
+            std::cout << "Type in all caps \"i want to delete all tasks\"\n> ";
+            std::getline(std::cin, ans);
+
+            if (ans == "I WANT TO DELETE ALL TASKS") {
+                {
+                    bool del;
+                    for (const auto &entry :
+                         std::filesystem::directory_iterator(path)) {
+                        del = std::filesystem::remove(entry);
+                    }
+                    if (del) {
+                        std::cout << "Tasks deleted sucessfully\n";
+                    }
+                    return;
+                }
+            }
+        }
+        std::cout << "Nothing happened\n";
+        return;
+    }
+
+    path += Tokens[1] + ".cfg";
+    int ID;
+    libconfig::Config cfg;
+
+    try {
+        cfg.readFile(path);
+    } catch (const libconfig::FileIOException &fioex) {
+        std::cerr << "I/O error while reading file.\n";
+        return;
+    } catch (const libconfig::ParseException &pex) {
+        std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
+                  << " - " << pex.getError() << "\n";
+        return;
+    }
+    libconfig::Setting &root = cfg.getRoot();
+    if (!root.exists("Tasks")) {
+        std::cout << "Couln't locate tasks for deletion\n";
+        return;
+    }
+    cmdShow();
+
+    std::cout << "What ID would you like to delete?\n> ";
+    std::cin >> ID;
+
+    libconfig::Setting &tasks = root["Tasks"];
+
+    try {
+        for (int i = 0; i < tasks.getLength(); i++) {
+            libconfig::Setting &task = tasks[i];
+            std::string taskId       = task.lookup("ID");
+            if (stoi(taskId) == ID) {
+                tasks.remove(task.getIndex());
+            }
+        }
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        std::cerr << "Didn't find Tasks\n";
+        return;
+    }
+    try {
+        cfg.writeFile(path);
+        std::cerr << "success\n";
+    } catch (const libconfig::FileIOException &fioex) {
+        std::cerr << "Error" << path << '\n';
+        return;
+    }
 }
 
-void executeCommands() {
-  setUserSettings();
-
-  std::unordered_map<std::string, std::function<void()>> commandsMap{
-      {"show", show_command},     {"help", help_command},   {"h", help_command},
-      {"create", create_command}, {"set", setUserSettings},
-  };
-
-  while (true) {
-    Tokens = getUserInput();
-    if (commandsMap.find(Tokens[0]) != commandsMap.end()) {
-      commandsMap[Tokens[0]]();
+void cmdEdit() {
+    if (Tokens.size() < 2) {
+        std::cout << "Wrong use of command\n";
+        return;
     }
-    Tokens.clear();
-  }
+
+    const std::string path = GetTaskPathFromConfigFile() + Tokens[1];
+    libconfig::Config cfg;
+
+    try {
+        cfg.readFile(path);
+    } catch (const libconfig::FileIOException &fioex) {
+        std::cerr << "I/O error while reading file.\n";
+        return;
+    } catch (const libconfig::ParseException &pex) {
+        std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
+                  << " - " << pex.getError() << "\n";
+        return;
+    }
+
+    libconfig::Setting &root = cfg.getRoot();
+
+    if (!root.exists("Task")) {
+        std::cout << "Couln't locate task\n";
+        return;
+    }
+}
+
+void ExecuteCommands() {
+    cmdSet();
+
+    std::unordered_map<std::string, std::function<void()>> commandsMap{
+        {"help",   cmdHelp  },
+        {"h",      cmdHelp  },
+        {"show",   cmdShow  },
+        {"create", cmdCreate},
+        {"set",    cmdSet   },
+        {"delete", cmdDelete},
+    };
+
+    while (true) {
+        Tokens = GetUserInput();
+        if (commandsMap.find(Tokens[0]) != commandsMap.end()) {
+            commandsMap[Tokens[0]]();
+        }
+    }
 }

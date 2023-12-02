@@ -6,23 +6,21 @@
 #include <vector>
 
 class Task {
- private:
-  const std::string LABEL;
-  unsigned int id;
-  std::string name;
-  std::string dueDate;
-  std::string description;
+    public:
+        void SaveTask();
+        Task(std::string label,
+             unsigned int id,
+             std::string name,
+             std::string date,
+             std::string description);
+        ~Task();
 
- public:
-  void createTask();
-  void deleteTask();
-  void editTask();
-  Task(std::string label, unsigned int id, std::string name, std::string date,
-       std::string description);
-  ~Task();
-
- private:
-  void saveTask();
+    private:
+        const std::string LABEL;
+        const unsigned int id;
+        const std::string name;
+        const std::string dueDate;
+        const std::string description;
 };
 
-unsigned int generateTaskID();
+unsigned int GenerateTaskID();

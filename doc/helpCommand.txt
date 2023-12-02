@@ -1,1 +1,3 @@
-aaaaa
+show <args>                   --displays tasks in a table | <args> = "all" or "task_label"
+create                        --creates task
+set                           --sets environment
