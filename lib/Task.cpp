@@ -1,22 +1,25 @@
 #include <filesystem>
+#include <fstream>
 #include <iostream>
-#include <libconfig.h++>
 #include <string>
 
+#include "../include/libconfig/lib/libconfig.h++"
 #include "Commands.hpp"
 #include "Environment.hpp"
 #include "Task.hpp"
 
-Task::Task(const std::string label,
-           const unsigned int id,
-           const std::string name,
-           const std::string dueDate,
-           const std::string description)
+Task::Task(std::string label,
+           uint id,
+           std::string name,
+           std::string dueDate,
+           std::string description)
     : LABEL(label),
       id(id),
       name(name),
       dueDate(dueDate),
-      description(description){};
+      description(description) {
+    SaveTask();
+};
 
 uint GenerateTaskID() {
     uint generatedID       = 0;
@@ -63,15 +66,17 @@ void Task::SaveTask() {
         return;
     }
 
-    const std::string path       = GetTaskPathFromConfigFile();
-    const std::string outputFile = path + LABEL + ".cfg";
-    const bool directory         = std::filesystem::create_directory(path) ||
-                           std::filesystem::is_directory(path);
+    std::string path       = GetTaskPathFromConfigFile();
+    std::string outputFile = path + LABEL + ".cfg";
+    bool directory         = std::filesystem::create_directory(path) ||
+                     std::filesystem::is_directory(path);
     if (!directory) {
         std::cout << "Error creating directory: " << path << '\n';
         return;
     }
-    // std::fstream myFile(path + LABEL + ".cfg", std::ios::app);
+    std::fstream myFile(path + LABEL + ".cfg", std::ios::app);
+    myFile.close();  // This is so it creates the file before cfg tries to read
+                     // it else it throws fioex
 
     libconfig::Config cfg;
     cfg.setOptions(libconfig::Config::OptionFsync |
@@ -83,9 +88,11 @@ void Task::SaveTask() {
         cfg.readFile(outputFile);
     } catch (const libconfig::FileIOException &fioex) {
         std::cerr << "I/O error while reading file." << std::endl;
+        return;
     } catch (const libconfig::ParseException &pex) {
         std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
                   << " - " << pex.getError() << std::endl;
+        return;
     }
     libconfig::Setting &root = cfg.getRoot();
     if (!root.exists("Tasks")) {
@@ -102,7 +109,7 @@ void Task::SaveTask() {
 
     try {
         cfg.writeFile(outputFile);
-        std::cerr << "success\n";
+        std::cerr << "Succesfully saved task\n";
     } catch (const libconfig::FileIOException &fioex) {
         std::cerr << "Error" << outputFile << '\n';
         return;

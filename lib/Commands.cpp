@@ -14,6 +14,8 @@
 #include "Task.hpp"
 
 std::vector<std::string> Tokens;
+const std::string taskPath = GetTaskPathFromConfigFile();
+const std::string execPath = GetCurrentExecutablePath();
 
 std::vector<std::string> GetUserInput() {
     std::string userInput;
@@ -188,7 +190,7 @@ void cmdHelp() {
 
 void cmdShow() {
     libconfig::Config cfg;
-    std::string path = GetTaskPathFromConfigFile();
+    std::string path = taskPath;
     std::vector<std::array<std::string, 4>> taskVector;
     outputTemplate print;
 
@@ -199,7 +201,8 @@ void cmdShow() {
     }
 
     if (Tokens[1] == "all") {
-        for (const auto &entry : std::filesystem::directory_iterator(path)) {
+        for (const auto &entry :
+             std::filesystem::directory_iterator(taskPath)) {
             try {
                 cfg.readFile(entry.path());
             } catch (const libconfig::FileIOException &fioex) {
@@ -297,14 +300,14 @@ void cmdCreate() {
               taskObjectsArray[1],
               taskObjectsArray[2],
               taskObjectsArray[3]);
-    task.SaveTask();
 }
+
 void cmdDelete() {
     if (Tokens.size() < 2) {
         std::cout << "Wrong use of command\n";
         return;
     }
-    std::string path = GetTaskPathFromConfigFile();
+    std::string path = taskPath;
     if (Tokens[1] == "all") {
         std::string ans;
         std::cout << "Are you sure you want to delete all tasks?[y/n]\n> ";
@@ -332,8 +335,31 @@ void cmdDelete() {
     }
 
     path += Tokens[1] + ".cfg";
-    int ID;
     libconfig::Config cfg;
+
+    cmdShow();
+    std::string ans;
+    std::cout << "Insert the ID of the taks would you like to delete?\n> ";
+    std::getline(std::cin, ans);
+    if (ans == "all") {
+        std::cout << "Are you sure you want to delete all tasks in this "
+                     "label?[y/n]\n> ";
+        std::getline(std::cin, ans);
+        if (ans == "y" || ans == "yes") {
+            std::cout << "Type in all caps \"i want to delete all tasks\"\n> ";
+            std::getline(std::cin, ans);
+
+            if (ans == "I WANT TO DELETE ALL TASKS") {
+                const bool del = std::filesystem::remove(path);
+                if (del) {
+                    std::cout << "Tasks deleted sucessfully\n";
+                }
+                return;
+            }
+        }
+        std::cout << "Nothing happened\n";
+        return;
+    }
 
     try {
         cfg.readFile(path);
@@ -350,10 +376,6 @@ void cmdDelete() {
         std::cout << "Couln't locate tasks for deletion\n";
         return;
     }
-    cmdShow();
-
-    std::cout << "What ID would you like to delete?\n> ";
-    std::cin >> ID;
 
     libconfig::Setting &tasks = root["Tasks"];
 
@@ -361,7 +383,7 @@ void cmdDelete() {
         for (int i = 0; i < tasks.getLength(); i++) {
             libconfig::Setting &task = tasks[i];
             std::string taskId       = task.lookup("ID");
-            if (stoi(taskId) == ID) {
+            if (taskId == ans) {
                 tasks.remove(task.getIndex());
             }
         }
@@ -371,9 +393,9 @@ void cmdDelete() {
     }
     try {
         cfg.writeFile(path);
-        std::cerr << "success\n";
+        std::cerr << "Sucessfuly wrote to file\n";
     } catch (const libconfig::FileIOException &fioex) {
-        std::cerr << "Error" << path << '\n';
+        std::cerr << "Error at: " << path << '\n';
         return;
     }
 }
@@ -384,8 +406,13 @@ void cmdEdit() {
         return;
     }
 
-    const std::string path = GetTaskPathFromConfigFile() + Tokens[1];
+    const std::string path = taskPath + Tokens[1] + ".cfg";
     libconfig::Config cfg;
+
+    cmdShow();
+    std::string ans;
+    std::cout << "Insert the ID of the taks would you like to delete?\n> ";
+    std::getline(std::cin, ans);
 
     try {
         cfg.readFile(path);
@@ -397,13 +424,53 @@ void cmdEdit() {
                   << " - " << pex.getError() << "\n";
         return;
     }
+    std::cout << "1\n";
 
     libconfig::Setting &root = cfg.getRoot();
 
-    if (!root.exists("Task")) {
+    if (!root.exists("Tasks")) {
         std::cout << "Couln't locate task\n";
         return;
     }
+    std::cout << "2\n";
+    libconfig::Setting &tasks = root["Tasks"];
+
+    std::array<std::string, 3> taskFieldsArray;
+    std::array<std::string, 3> taskFieldsQuestions = {
+        "What should the name be:\n> ",
+        "What should the date be:\n> ",
+        "What should the description be:\n> ",
+    };
+    std::string ID;
+
+    try {
+        for (int i = 0; i < tasks.getLength(); i++) {
+            libconfig::Setting &task = tasks[i];
+            std::string taskId       = task.lookup("ID");
+            if (taskId == ans) {
+                ID = tasks[i].lookup("ID").c_str();
+                tasks.remove(task.getIndex());
+            }
+        }
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        std::cerr << "Didn't find Tasks\n";
+        return;
+    }
+    for (int i = 0; i < taskFieldsArray.size(); i++) {
+        std::cout << taskFieldsQuestions[i];
+        std::cin >> taskFieldsArray[i];
+    }
+    try {
+        cfg.writeFile(path);
+    } catch (const libconfig::FileIOException &fioex) {
+        std::cerr << "Error" << path << '\n';
+        return;
+    }
+    Task task(Tokens[1],
+              atoi(ID.c_str()),
+              taskFieldsArray[0],
+              taskFieldsArray[1],
+              taskFieldsArray[2]);
 }
 
 void ExecuteCommands() {
@@ -416,6 +483,7 @@ void ExecuteCommands() {
         {"create", cmdCreate},
         {"set",    cmdSet   },
         {"delete", cmdDelete},
+        {"edit",   cmdEdit  },
     };
 
     while (true) {
