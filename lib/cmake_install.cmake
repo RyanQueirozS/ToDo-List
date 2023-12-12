@@ -1,4 +1,4 @@
-# Install script for directory: /home/ryan/Documents/projects/cpp/ToDo-List/lib
+# Install script for directory: /home/ryan/projects/cpp/ToDo-List/lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

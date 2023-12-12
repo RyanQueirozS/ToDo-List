@@ -54,48 +54,30 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ryan/Documents/projects/cpp/ToDo-List
+CMAKE_SOURCE_DIR = /home/ryan/projects/cpp/ToDo-List
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ryan/Documents/projects/cpp/ToDo-List
+CMAKE_BINARY_DIR = /home/ryan/projects/cpp/ToDo-List
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
 all: CMakeFiles/todoc.dir/all
-all: include/all
 all: lib/all
 all: src/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: include/preinstall
 preinstall: lib/preinstall
 preinstall: src/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/todoc.dir/clean
-clean: include/clean
 clean: lib/clean
 clean: src/clean
 .PHONY : clean
-
-#=============================================================================
-# Directory level rules for directory include
-
-# Recursive "all" directory target.
-include/all: include/CMakeFiles/include.dir/all
-.PHONY : include/all
-
-# Recursive "preinstall" directory target.
-include/preinstall:
-.PHONY : include/preinstall
-
-# Recursive "clean" directory target.
-include/clean: include/CMakeFiles/include.dir/clean
-.PHONY : include/clean
 
 #=============================================================================
 # Directory level rules for directory lib
@@ -131,19 +113,18 @@ src/clean: src/CMakeFiles/src.dir/clean
 # Target rules for target CMakeFiles/todoc.dir
 
 # All Build rule for target.
-CMakeFiles/todoc.dir/all: include/CMakeFiles/include.dir/all
 CMakeFiles/todoc.dir/all: lib/CMakeFiles/lib.dir/all
 CMakeFiles/todoc.dir/all: src/CMakeFiles/src.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/todoc.dir/build.make CMakeFiles/todoc.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/todoc.dir/build.make CMakeFiles/todoc.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles --progress-num=17,18 "Built target todoc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ryan/projects/cpp/ToDo-List/CMakeFiles --progress-num=7,8 "Built target todoc"
 .PHONY : CMakeFiles/todoc.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/todoc.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/todoc.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles 0
 .PHONY : CMakeFiles/todoc.dir/rule
 
 # Convenience name for target.
@@ -156,46 +137,20 @@ CMakeFiles/todoc.dir/clean:
 .PHONY : CMakeFiles/todoc.dir/clean
 
 #=============================================================================
-# Target rules for target include/CMakeFiles/include.dir
-
-# All Build rule for target.
-include/CMakeFiles/include.dir/all:
-	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/include.dir/build.make include/CMakeFiles/include.dir/depend
-	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/include.dir/build.make include/CMakeFiles/include.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target include"
-.PHONY : include/CMakeFiles/include.dir/all
-
-# Build rule for subdir invocation for target.
-include/CMakeFiles/include.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 10
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include/CMakeFiles/include.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 0
-.PHONY : include/CMakeFiles/include.dir/rule
-
-# Convenience name for target.
-include: include/CMakeFiles/include.dir/rule
-.PHONY : include
-
-# clean rule for target.
-include/CMakeFiles/include.dir/clean:
-	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/include.dir/build.make include/CMakeFiles/include.dir/clean
-.PHONY : include/CMakeFiles/include.dir/clean
-
-#=============================================================================
 # Target rules for target lib/CMakeFiles/lib.dir
 
 # All Build rule for target.
 lib/CMakeFiles/lib.dir/all:
 	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/depend
 	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles --progress-num=11,12,13,14 "Built target lib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ryan/projects/cpp/ToDo-List/CMakeFiles --progress-num=1,2,3,4 "Built target lib"
 .PHONY : lib/CMakeFiles/lib.dir/all
 
 # Build rule for subdir invocation for target.
 lib/CMakeFiles/lib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/CMakeFiles/lib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles 0
 .PHONY : lib/CMakeFiles/lib.dir/rule
 
 # Convenience name for target.
@@ -214,14 +169,14 @@ lib/CMakeFiles/lib.dir/clean:
 src/CMakeFiles/src.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles --progress-num=15,16 "Built target src"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/ryan/projects/cpp/ToDo-List/CMakeFiles --progress-num=5,6 "Built target src"
 .PHONY : src/CMakeFiles/src.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/src.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/src.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles 0
 .PHONY : src/CMakeFiles/src.dir/rule
 
 # Convenience name for target.

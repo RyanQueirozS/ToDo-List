@@ -12,5 +12,5 @@ void cmdCreate();
 void cmdDelete();
 void cmdEdit();
 
-std::vector<std::string> GetUserInput();
+void GetUserInput();
 std::string GetCurrentExecutablePath();

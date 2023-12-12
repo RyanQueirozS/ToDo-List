@@ -1,4 +1,4 @@
-# Install script for directory: /home/ryan/Documents/projects/cpp/ToDo-List
+# Install script for directory: /home/ryan/projects/cpp/ToDo-List
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,17 +44,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/ryan/Documents/projects/cpp/ToDo-List/include/cmake_install.cmake")
+  include("/home/ryan/projects/cpp/ToDo-List/lib/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/ryan/Documents/projects/cpp/ToDo-List/lib/cmake_install.cmake")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/home/ryan/Documents/projects/cpp/ToDo-List/src/cmake_install.cmake")
+  include("/home/ryan/projects/cpp/ToDo-List/src/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -65,5 +60,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ryan/Documents/projects/cpp/ToDo-List/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ryan/projects/cpp/ToDo-List/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

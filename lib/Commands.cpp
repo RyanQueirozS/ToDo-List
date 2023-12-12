@@ -1,4 +1,5 @@
 #include <array>
+#include <cmath>
 #include <filesystem>
 #include <fstream>
 #include <functional>
@@ -17,7 +18,7 @@ std::vector<std::string> Tokens;
 const std::string taskPath = GetTaskPathFromConfigFile();
 const std::string execPath = GetCurrentExecutablePath();
 
-std::vector<std::string> GetUserInput() {
+void GetUserInput() {
     std::string userInput;
     std::cout << "> ";
     std::getline(std::cin, userInput);
@@ -27,32 +28,26 @@ std::vector<std::string> GetUserInput() {
     const std::istream_iterator<std::string> end;
     const std::vector<std::string> tokens(begin, end);
 
-    return tokens;
+    Tokens = tokens;
 }
 
 struct outputTemplate {
     public:
         void printTasks(
             const std::vector<std::array<std::string, 4>> taskVector) {
+            int headerSize = GetHeaderSize(taskVector);
             if (taskVector.empty()) {
-                PrintHeader();
+                PrintHeader(headerSize);
                 std::cout << "|      Didn't find any tasks     |\n";
-                PrintLine();
+                PrintLine(headerSize);
                 return;
             }
-            PrintHeader();
-            std::cout << "|"
-                      << " ID "
-                      << "|"
-                      << " Name "
-                      << "|"
-                      << " Date "
-                      << "|"
-                      << " Description "
-                      << "|\n";
+
+            PrintHeader(headerSize);
+            std::cout << "| ID | Name | Date | Description |\n";
 
             for (int i = 0; i < taskVector.size(); i++) {
-                PrintLine();
+                PrintLine(headerSize);
                 for (int j = 0; j < taskVector[i].size(); j++) {
                     std::cout << "| ";
                     if (j == 0 && taskVector[i][j].size() == 1) {
@@ -87,26 +82,63 @@ struct outputTemplate {
         }
 
     private:
-        void PrintLine() {
+        int GetHeaderSize(std::vector<std::array<std::string, 4>> taskVector) {
+            int headerSize = 0, biggestId = 0, biggestName = 0,
+                biggestDescription = 0;
+
+            for (std::array<std::string, 4> x : taskVector) {
+                if (biggestId > x[0].size()) {
+                    biggestId = x[0].size();
+                }
+                if (biggestName > x[1].size()) {
+                    biggestId = x[1].size();
+                }
+                if (biggestDescription > x[3].size()) {
+                    biggestDescription = x[3].size();
+                }
+            }
+            if (biggestId < 2) {
+                headerSize++;
+            }
+            if (biggestName < 4) {
+                headerSize += 4 - biggestName;
+            }
+            if (biggestDescription < 11) {
+                headerSize += 11 - biggestDescription;
+            }
+            headerSize += 13;  // Value of spaces and '|';
+            std::cout << headerSize << std::endl;
+            return headerSize;
+        }
+        void PrintLine(int &lineSize) {
             std::cout << "+";
-            for (int i = 0; i < 32; i++) {
+            for (int i = 0; i < lineSize; i++) {
                 std::cout << "-";
             }
             std::cout << "+\n";
         }
 
-        void PrintHeader() {
-            PrintLine();
+        void PrintHeader(int &headerSize) {
+            if (headerSize < 32) {
+                headerSize = 32;
+            }
+            if (headerSize % 2) {
+            }
+            int labelSize = 5;
+            int labelPos  = std::round((headerSize - labelSize) / 2);
+
+            std::cout << headerSize << std::endl;
+            PrintLine(headerSize);
 
             std::cout << "|";
-            for (int i = 0; i < 27; i++) {
+            for (int i = 0; i < headerSize - 5; i++) {
                 std::cout << " ";
-                if (i == 27 / 2) {
+                if (i == labelPos) {
                     std::cout << "LABEL";
                 }
             }
             std::cout << "|\n";
-            PrintLine();
+            PrintLine(headerSize);
         }
 };
 
@@ -146,7 +178,7 @@ void cmdSet() {
 
     if (userEnvFile.is_open()) {
         std::cout << "Your executable path for reference: "
-                  << GetCurrentExecutablePath() << '\n'
+                  << GetCurrentExecutablePath()
                   << "\nPlease answer to set your environment up:\n"
                   << "Set Task Path:\n> ";
         std::cin >> envSettingsArray[0];
@@ -195,8 +227,15 @@ void cmdShow() {
     outputTemplate print;
 
     if (Tokens.size() < 2) {
-        // In the future I want to make it display possibilities
-        std::cout << "Wrong use of command\n";
+        int last = taskPath.find_last_of("/");
+        std::cout << "Possible Labels:\n";
+        for (const auto &entry :
+             std::filesystem::directory_iterator(taskPath)) {
+            std::cout << " - " << entry.path().string().substr(last + 1)
+                      << "\n";
+        }
+        std::cout
+            << "You do not need to include '.cfg' when using this command\n";
         return;
     }
 
@@ -487,8 +526,11 @@ void ExecuteCommands() {
     };
 
     while (true) {
-        Tokens = GetUserInput();
-        if (commandsMap.find(Tokens[0]) != commandsMap.end()) {
+        GetUserInput();
+        if (Tokens.empty()) {
+            // does nothing. This is so it doesn't break when passing through
+            // the map.
+        } else if (commandsMap.find(Tokens[0]) != commandsMap.end()) {
             commandsMap[Tokens[0]]();
         }
     }

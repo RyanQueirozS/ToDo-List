@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ryan/Documents/projects/cpp/ToDo-List
+CMAKE_SOURCE_DIR = /home/ryan/projects/cpp/ToDo-List
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ryan/Documents/projects/cpp/ToDo-List
+CMAKE_BINARY_DIR = /home/ryan/projects/cpp/ToDo-List
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles /home/ryan/Documents/projects/cpp/ToDo-List//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles /home/ryan/projects/cpp/ToDo-List//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,19 +128,6 @@ todoc: cmake_check_build_system
 todoc/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/todoc.dir/build.make CMakeFiles/todoc.dir/build
 .PHONY : todoc/fast
-
-#=============================================================================
-# Target rules for targets named include
-
-# Build rule for target.
-include: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 include
-.PHONY : include
-
-# fast build rule for target.
-include/fast:
-	$(MAKE) $(MAKESILENT) -f include/CMakeFiles/include.dir/build.make include/CMakeFiles/include.dir/build
-.PHONY : include/fast
 
 #=============================================================================
 # Target rules for targets named lib
@@ -200,7 +187,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... include"
 	@echo "... lib"
 	@echo "... src"
 	@echo "... todoc"

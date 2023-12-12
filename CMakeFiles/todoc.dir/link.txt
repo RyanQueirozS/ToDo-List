@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/todoc.dir/src/main.cpp.o -o todoc  lib/liblib.a src/libsrc.a include/libinclude.a 
+/usr/bin/c++ CMakeFiles/todoc.dir/src/main.cpp.o -o todoc  lib/liblib.a src/libsrc.a -lconfig++ 

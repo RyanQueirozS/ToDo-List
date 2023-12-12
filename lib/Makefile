@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ryan/Documents/projects/cpp/ToDo-List
+CMAKE_SOURCE_DIR = /home/ryan/projects/cpp/ToDo-List
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ryan/Documents/projects/cpp/ToDo-List
+CMAKE_BINARY_DIR = /home/ryan/projects/cpp/ToDo-List
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles /home/ryan/Documents/projects/cpp/ToDo-List/lib//CMakeFiles/progress.marks
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles 0
+	cd /home/ryan/projects/cpp/ToDo-List && $(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles /home/ryan/projects/cpp/ToDo-List/lib//CMakeFiles/progress.marks
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ryan/projects/cpp/ToDo-List/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/clean
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/preinstall
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/preinstall
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/ryan/projects/cpp/ToDo-List && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 lib/CMakeFiles/lib.dir/rule:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/CMakeFiles/lib.dir/rule
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib/CMakeFiles/lib.dir/rule
 .PHONY : lib/CMakeFiles/lib.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ lib: lib/CMakeFiles/lib.dir/rule
 
 # fast build rule for target.
 lib/fast:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/build
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/build
 .PHONY : lib/fast
 
 Commands.o: Commands.cpp.o
@@ -135,7 +135,7 @@ Commands.o: Commands.cpp.o
 
 # target to build an object file
 Commands.cpp.o:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Commands.cpp.o
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Commands.cpp.o
 .PHONY : Commands.cpp.o
 
 Commands.i: Commands.cpp.i
@@ -143,7 +143,7 @@ Commands.i: Commands.cpp.i
 
 # target to preprocess a source file
 Commands.cpp.i:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Commands.cpp.i
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Commands.cpp.i
 .PHONY : Commands.cpp.i
 
 Commands.s: Commands.cpp.s
@@ -151,7 +151,7 @@ Commands.s: Commands.cpp.s
 
 # target to generate assembly for a file
 Commands.cpp.s:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Commands.cpp.s
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Commands.cpp.s
 .PHONY : Commands.cpp.s
 
 Environment.o: Environment.cpp.o
@@ -159,7 +159,7 @@ Environment.o: Environment.cpp.o
 
 # target to build an object file
 Environment.cpp.o:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Environment.cpp.o
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Environment.cpp.o
 .PHONY : Environment.cpp.o
 
 Environment.i: Environment.cpp.i
@@ -167,7 +167,7 @@ Environment.i: Environment.cpp.i
 
 # target to preprocess a source file
 Environment.cpp.i:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Environment.cpp.i
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Environment.cpp.i
 .PHONY : Environment.cpp.i
 
 Environment.s: Environment.cpp.s
@@ -175,7 +175,7 @@ Environment.s: Environment.cpp.s
 
 # target to generate assembly for a file
 Environment.cpp.s:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Environment.cpp.s
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Environment.cpp.s
 .PHONY : Environment.cpp.s
 
 Task.o: Task.cpp.o
@@ -183,7 +183,7 @@ Task.o: Task.cpp.o
 
 # target to build an object file
 Task.cpp.o:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Task.cpp.o
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Task.cpp.o
 .PHONY : Task.cpp.o
 
 Task.i: Task.cpp.i
@@ -191,7 +191,7 @@ Task.i: Task.cpp.i
 
 # target to preprocess a source file
 Task.cpp.i:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Task.cpp.i
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Task.cpp.i
 .PHONY : Task.cpp.i
 
 Task.s: Task.cpp.s
@@ -199,7 +199,7 @@ Task.s: Task.cpp.s
 
 # target to generate assembly for a file
 Task.cpp.s:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Task.cpp.s
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/Task.cpp.s
 .PHONY : Task.cpp.s
 
 # Help Target
@@ -231,6 +231,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/ryan/projects/cpp/ToDo-List && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -20,10 +20,13 @@ set(CMAKE_CXX_STANDART 20)
 add_executable(${PROJECT_NAME} src/main.cpp)
 
 # handeling dependecies
-add_subdirectory(include)
+find_package(PkgConfig REQUIRED)
+pkg_search_module(LIBCONFIG REQUIRED libconfig++)
+include_directories(${LIBCONFIG_INCLUDE_DIRS})
+link_directories(${LIBCONFIG_LIBRARY_DIRS})
 
 # handeling main packages
 add_subdirectory(lib)
 add_subdirectory(src)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE lib src include)
+target_link_libraries(${PROJECT_NAME} PRIVATE lib src ${LIBCONFIG_LIBRARIES})

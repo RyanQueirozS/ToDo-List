@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ryan/Documents/projects/cpp/ToDo-List
+CMAKE_SOURCE_DIR = /home/ryan/projects/cpp/ToDo-List
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ryan/Documents/projects/cpp/ToDo-List
+CMAKE_BINARY_DIR = /home/ryan/projects/cpp/ToDo-List
 
 # Include any dependencies generated for this target.
 include lib/CMakeFiles/lib.dir/depend.make
@@ -72,44 +72,44 @@ include lib/CMakeFiles/lib.dir/flags.make
 lib/CMakeFiles/lib.dir/Commands.cpp.o: lib/CMakeFiles/lib.dir/flags.make
 lib/CMakeFiles/lib.dir/Commands.cpp.o: lib/Commands.cpp
 lib/CMakeFiles/lib.dir/Commands.cpp.o: lib/CMakeFiles/lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object lib/CMakeFiles/lib.dir/Commands.cpp.o"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT lib/CMakeFiles/lib.dir/Commands.cpp.o -MF CMakeFiles/lib.dir/Commands.cpp.o.d -o CMakeFiles/lib.dir/Commands.cpp.o -c /home/ryan/Documents/projects/cpp/ToDo-List/lib/Commands.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ryan/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object lib/CMakeFiles/lib.dir/Commands.cpp.o"
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT lib/CMakeFiles/lib.dir/Commands.cpp.o -MF CMakeFiles/lib.dir/Commands.cpp.o.d -o CMakeFiles/lib.dir/Commands.cpp.o -c /home/ryan/projects/cpp/ToDo-List/lib/Commands.cpp
 
 lib/CMakeFiles/lib.dir/Commands.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lib.dir/Commands.cpp.i"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ryan/Documents/projects/cpp/ToDo-List/lib/Commands.cpp > CMakeFiles/lib.dir/Commands.cpp.i
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ryan/projects/cpp/ToDo-List/lib/Commands.cpp > CMakeFiles/lib.dir/Commands.cpp.i
 
 lib/CMakeFiles/lib.dir/Commands.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lib.dir/Commands.cpp.s"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ryan/Documents/projects/cpp/ToDo-List/lib/Commands.cpp -o CMakeFiles/lib.dir/Commands.cpp.s
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ryan/projects/cpp/ToDo-List/lib/Commands.cpp -o CMakeFiles/lib.dir/Commands.cpp.s
 
 lib/CMakeFiles/lib.dir/Environment.cpp.o: lib/CMakeFiles/lib.dir/flags.make
 lib/CMakeFiles/lib.dir/Environment.cpp.o: lib/Environment.cpp
 lib/CMakeFiles/lib.dir/Environment.cpp.o: lib/CMakeFiles/lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object lib/CMakeFiles/lib.dir/Environment.cpp.o"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT lib/CMakeFiles/lib.dir/Environment.cpp.o -MF CMakeFiles/lib.dir/Environment.cpp.o.d -o CMakeFiles/lib.dir/Environment.cpp.o -c /home/ryan/Documents/projects/cpp/ToDo-List/lib/Environment.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ryan/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object lib/CMakeFiles/lib.dir/Environment.cpp.o"
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT lib/CMakeFiles/lib.dir/Environment.cpp.o -MF CMakeFiles/lib.dir/Environment.cpp.o.d -o CMakeFiles/lib.dir/Environment.cpp.o -c /home/ryan/projects/cpp/ToDo-List/lib/Environment.cpp
 
 lib/CMakeFiles/lib.dir/Environment.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lib.dir/Environment.cpp.i"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ryan/Documents/projects/cpp/ToDo-List/lib/Environment.cpp > CMakeFiles/lib.dir/Environment.cpp.i
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ryan/projects/cpp/ToDo-List/lib/Environment.cpp > CMakeFiles/lib.dir/Environment.cpp.i
 
 lib/CMakeFiles/lib.dir/Environment.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lib.dir/Environment.cpp.s"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ryan/Documents/projects/cpp/ToDo-List/lib/Environment.cpp -o CMakeFiles/lib.dir/Environment.cpp.s
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ryan/projects/cpp/ToDo-List/lib/Environment.cpp -o CMakeFiles/lib.dir/Environment.cpp.s
 
 lib/CMakeFiles/lib.dir/Task.cpp.o: lib/CMakeFiles/lib.dir/flags.make
 lib/CMakeFiles/lib.dir/Task.cpp.o: lib/Task.cpp
 lib/CMakeFiles/lib.dir/Task.cpp.o: lib/CMakeFiles/lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object lib/CMakeFiles/lib.dir/Task.cpp.o"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT lib/CMakeFiles/lib.dir/Task.cpp.o -MF CMakeFiles/lib.dir/Task.cpp.o.d -o CMakeFiles/lib.dir/Task.cpp.o -c /home/ryan/Documents/projects/cpp/ToDo-List/lib/Task.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ryan/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object lib/CMakeFiles/lib.dir/Task.cpp.o"
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT lib/CMakeFiles/lib.dir/Task.cpp.o -MF CMakeFiles/lib.dir/Task.cpp.o.d -o CMakeFiles/lib.dir/Task.cpp.o -c /home/ryan/projects/cpp/ToDo-List/lib/Task.cpp
 
 lib/CMakeFiles/lib.dir/Task.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lib.dir/Task.cpp.i"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ryan/Documents/projects/cpp/ToDo-List/lib/Task.cpp > CMakeFiles/lib.dir/Task.cpp.i
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ryan/projects/cpp/ToDo-List/lib/Task.cpp > CMakeFiles/lib.dir/Task.cpp.i
 
 lib/CMakeFiles/lib.dir/Task.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lib.dir/Task.cpp.s"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ryan/Documents/projects/cpp/ToDo-List/lib/Task.cpp -o CMakeFiles/lib.dir/Task.cpp.s
+	cd /home/ryan/projects/cpp/ToDo-List/lib && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ryan/projects/cpp/ToDo-List/lib/Task.cpp -o CMakeFiles/lib.dir/Task.cpp.s
 
 # Object files for target lib
 lib_OBJECTS = \
@@ -125,19 +125,19 @@ lib/liblib.a: lib/CMakeFiles/lib.dir/Environment.cpp.o
 lib/liblib.a: lib/CMakeFiles/lib.dir/Task.cpp.o
 lib/liblib.a: lib/CMakeFiles/lib.dir/build.make
 lib/liblib.a: lib/CMakeFiles/lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ryan/Documents/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library liblib.a"
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && $(CMAKE_COMMAND) -P CMakeFiles/lib.dir/cmake_clean_target.cmake
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lib.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ryan/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library liblib.a"
+	cd /home/ryan/projects/cpp/ToDo-List/lib && $(CMAKE_COMMAND) -P CMakeFiles/lib.dir/cmake_clean_target.cmake
+	cd /home/ryan/projects/cpp/ToDo-List/lib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 lib/CMakeFiles/lib.dir/build: lib/liblib.a
 .PHONY : lib/CMakeFiles/lib.dir/build
 
 lib/CMakeFiles/lib.dir/clean:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List/lib && $(CMAKE_COMMAND) -P CMakeFiles/lib.dir/cmake_clean.cmake
+	cd /home/ryan/projects/cpp/ToDo-List/lib && $(CMAKE_COMMAND) -P CMakeFiles/lib.dir/cmake_clean.cmake
 .PHONY : lib/CMakeFiles/lib.dir/clean
 
 lib/CMakeFiles/lib.dir/depend:
-	cd /home/ryan/Documents/projects/cpp/ToDo-List && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ryan/Documents/projects/cpp/ToDo-List /home/ryan/Documents/projects/cpp/ToDo-List/lib /home/ryan/Documents/projects/cpp/ToDo-List /home/ryan/Documents/projects/cpp/ToDo-List/lib /home/ryan/Documents/projects/cpp/ToDo-List/lib/CMakeFiles/lib.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/ryan/projects/cpp/ToDo-List && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ryan/projects/cpp/ToDo-List /home/ryan/projects/cpp/ToDo-List/lib /home/ryan/projects/cpp/ToDo-List /home/ryan/projects/cpp/ToDo-List/lib /home/ryan/projects/cpp/ToDo-List/lib/CMakeFiles/lib.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : lib/CMakeFiles/lib.dir/depend
 
