@@ -26,7 +26,7 @@ include_directories(${LIBCONFIG_INCLUDE_DIRS})
 link_directories(${LIBCONFIG_LIBRARY_DIRS})
 
 # handeling main packages
-add_subdirectory(lib)
+# add_subdirectory(lib)
 add_subdirectory(src)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE lib src ${LIBCONFIG_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PRIVATE src ${LIBCONFIG_LIBRARIES})

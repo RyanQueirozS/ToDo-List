@@ -7,7 +7,6 @@ void ExecuteCommands();
 
 void cmdShow();
 void cmdHelp();
-void cmdSet();
 void cmdCreate();
 void cmdDelete();
 void cmdEdit();

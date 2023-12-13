@@ -92,7 +92,6 @@ todoc_EXTERNAL_OBJECTS =
 
 todoc: CMakeFiles/todoc.dir/src/main.cpp.o
 todoc: CMakeFiles/todoc.dir/build.make
-todoc: lib/liblib.a
 todoc: src/libsrc.a
 todoc: CMakeFiles/todoc.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ryan/projects/cpp/ToDo-List/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable todoc"

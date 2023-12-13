@@ -1,2 +1,2 @@
-/usr/bin/ar qc libsrc.a CMakeFiles/src.dir/main.cpp.o
+/usr/bin/ar qc libsrc.a CMakeFiles/src.dir/Commands.cpp.o CMakeFiles/src.dir/Environment.cpp.o CMakeFiles/src.dir/Task.cpp.o CMakeFiles/src.dir/main.cpp.o
 /usr/bin/ranlib libsrc.a

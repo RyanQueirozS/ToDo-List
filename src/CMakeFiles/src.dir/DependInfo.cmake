@@ -8,6 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/ryan/projects/cpp/ToDo-List/src/Commands.cpp" "src/CMakeFiles/src.dir/Commands.cpp.o" "gcc" "src/CMakeFiles/src.dir/Commands.cpp.o.d"
+  "/home/ryan/projects/cpp/ToDo-List/src/Environment.cpp" "src/CMakeFiles/src.dir/Environment.cpp.o" "gcc" "src/CMakeFiles/src.dir/Environment.cpp.o.d"
+  "/home/ryan/projects/cpp/ToDo-List/src/Task.cpp" "src/CMakeFiles/src.dir/Task.cpp.o" "gcc" "src/CMakeFiles/src.dir/Task.cpp.o.d"
   "/home/ryan/projects/cpp/ToDo-List/src/main.cpp" "src/CMakeFiles/src.dir/main.cpp.o" "gcc" "src/CMakeFiles/src.dir/main.cpp.o.d"
   )
 

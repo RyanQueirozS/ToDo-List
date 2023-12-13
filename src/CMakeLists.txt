@@ -1,1 +1,5 @@
-add_library(src main.cpp)
+file(GLOB srcfiles
+  "./*.hpp"
+  "./*cpp"
+  )
+add_library(src ${srcfiles})

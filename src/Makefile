@@ -130,6 +130,78 @@ src/fast:
 	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/build
 .PHONY : src/fast
 
+Commands.o: Commands.cpp.o
+.PHONY : Commands.o
+
+# target to build an object file
+Commands.cpp.o:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Commands.cpp.o
+.PHONY : Commands.cpp.o
+
+Commands.i: Commands.cpp.i
+.PHONY : Commands.i
+
+# target to preprocess a source file
+Commands.cpp.i:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Commands.cpp.i
+.PHONY : Commands.cpp.i
+
+Commands.s: Commands.cpp.s
+.PHONY : Commands.s
+
+# target to generate assembly for a file
+Commands.cpp.s:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Commands.cpp.s
+.PHONY : Commands.cpp.s
+
+Environment.o: Environment.cpp.o
+.PHONY : Environment.o
+
+# target to build an object file
+Environment.cpp.o:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Environment.cpp.o
+.PHONY : Environment.cpp.o
+
+Environment.i: Environment.cpp.i
+.PHONY : Environment.i
+
+# target to preprocess a source file
+Environment.cpp.i:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Environment.cpp.i
+.PHONY : Environment.cpp.i
+
+Environment.s: Environment.cpp.s
+.PHONY : Environment.s
+
+# target to generate assembly for a file
+Environment.cpp.s:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Environment.cpp.s
+.PHONY : Environment.cpp.s
+
+Task.o: Task.cpp.o
+.PHONY : Task.o
+
+# target to build an object file
+Task.cpp.o:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Task.cpp.o
+.PHONY : Task.cpp.o
+
+Task.i: Task.cpp.i
+.PHONY : Task.i
+
+# target to preprocess a source file
+Task.cpp.i:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Task.cpp.i
+.PHONY : Task.cpp.i
+
+Task.s: Task.cpp.s
+.PHONY : Task.s
+
+# target to generate assembly for a file
+Task.cpp.s:
+	cd /home/ryan/projects/cpp/ToDo-List && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/Task.cpp.s
+.PHONY : Task.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -163,6 +235,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... src"
+	@echo "... Commands.o"
+	@echo "... Commands.i"
+	@echo "... Commands.s"
+	@echo "... Environment.o"
+	@echo "... Environment.i"
+	@echo "... Environment.s"
+	@echo "... Task.o"
+	@echo "... Task.i"
+	@echo "... Task.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

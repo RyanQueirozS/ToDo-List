@@ -11,7 +11,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.27.9/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.27.9/CMakeSystem.cmake"
   "CMakeLists.txt"
-  "lib/CMakeLists.txt"
   "src/CMakeLists.txt"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
@@ -45,13 +44,11 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "lib/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/todoc.dir/DependInfo.cmake"
-  "lib/CMakeFiles/lib.dir/DependInfo.cmake"
   "src/CMakeFiles/src.dir/DependInfo.cmake"
   )

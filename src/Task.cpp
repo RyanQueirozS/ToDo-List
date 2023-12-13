@@ -4,9 +4,9 @@
 #include <libconfig.h++>
 #include <string>
 
-#include "Commands.hpp"
-#include "Environment.hpp"
-#include "Task.hpp"
+#include "../lib/Commands.hpp"
+#include "../lib/Environment.hpp"
+#include "../lib/Task.hpp"
 
 Task::Task(std::string label,
            uint id,

@@ -1,3 +1,4 @@
 *.o
+config.log
 CMakeCache.txt
 todo.md

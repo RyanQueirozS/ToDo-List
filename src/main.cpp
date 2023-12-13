@@ -8,6 +8,6 @@ int main() {
                  "| Welcome to Your To-Do task Manager |\n"
                  "|                                    |\n"
                  "+------------------------------------+\n"
-                 "Type [h] for help, pres Ctrl C to quit\n";
+                 "Type [h]elp for help and 'exit' to quit\n";
     ExecuteCommands();
 }

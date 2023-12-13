@@ -130,19 +130,6 @@ todoc/fast:
 .PHONY : todoc/fast
 
 #=============================================================================
-# Target rules for targets named lib
-
-# Build rule for target.
-lib: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 lib
-.PHONY : lib
-
-# fast build rule for target.
-lib/fast:
-	$(MAKE) $(MAKESILENT) -f lib/CMakeFiles/lib.dir/build.make lib/CMakeFiles/lib.dir/build
-.PHONY : lib/fast
-
-#=============================================================================
 # Target rules for targets named src
 
 # Build rule for target.
@@ -187,7 +174,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... lib"
 	@echo "... src"
 	@echo "... todoc"
 	@echo "... src/main.o"
