@@ -1,19 +1,9 @@
 # ToDoC - A simple, terminal, C++ based task manager
 
 ## About
-<div style="margin-left: auto;
-margin-right: auto;
-width: 40%">
-
 **TODOC IS STILL IN DEVELOPMENT**\
-        </div>
-
-<div style="margin-left: auto;
-margin-right: auto;
-width: 90%">
 
 **IT SHOULD WORK, BUT DONT EXPECT FULL FUNCIONALITY OR TO NOT GET ERRORS**
-</div>
 
 \
 ToDoC is a easy to use Todo-list that uses little to no resources, while
@@ -46,7 +36,7 @@ All the other stuff is intended to be easy to understand. If you have any proble
 - Libconfig
 
 ### Installation
-```
+```bash
 git clone https://github.com/RyanQueirozS/ToDo-List.git
 cd ToDo-List
 cmake .
@@ -71,7 +61,7 @@ option "Date Format" doesn't work properly.
 
 ## Todo:
 ### Implementations:
-- [ ] Implement it to a database if user wants to
+- [ ] Use it with a database if user wants to
 - [ ] Easier configuration(Maybe even a config script)
 - [ ] Make DueDate  work
 - [ ] Order tasks based on their ID from < to >

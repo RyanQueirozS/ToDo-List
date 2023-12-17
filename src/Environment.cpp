@@ -32,8 +32,7 @@ std::string GetTaskPathFromConfigFile() {
 void SetupUserEnvironment(std::array<std::string, 2> &envSettingsArray) {
     libconfig::Config cfg;
     std::string exec_path = GetCurrentExecutablePath();
-    std::string path      = exec_path + "/doc/config.cfg";
-    std::ofstream configFile(path);
+    std::ofstream configFile(exec_path + "/doc/config.cfg");
 
     // Libconfig is easier to write, and easier to expand, but it
     // reads really bad.

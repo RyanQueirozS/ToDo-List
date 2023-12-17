@@ -31,9 +31,25 @@ void GetUserInput() {
 
 struct outputTemplate {
     public:
-        void PrintTaskInfo(
-            const std::vector<std::array<std::string, 4>> taskVector) {
-            std::vector<int> headerSize = GetHeaderSize(taskVector);
+        void PrintAllTasks(std::vector<std::array<std::string, 4>> taskVector) {
+            std::array<int, 5> headerSize = GetHeaderSize(taskVector);
+            PrintTaskLine(headerSize);
+            PrintTaskHeader(headerSize);
+            PrintTaskLine(headerSize);
+            PrintTaskInfo(taskVector);
+            PrintTaskLine(headerSize);
+        };
+
+    private:
+        void PrintTaskInfo(std::vector<std::array<std::string, 4>> taskVector) {
+            std::array<int, 5> headerSize = GetHeaderSize(taskVector);
+            std::array<std::string, 4> headerElements{
+                "ID",
+                "Name",
+                "Date",
+                "Description",
+            };
+
             if (taskVector.empty()) {
                 PrintTaskHeader(headerSize);
                 std::cout << "|      Didn't find any tasks     |\n";
@@ -41,11 +57,28 @@ struct outputTemplate {
                 return;
             }
 
-            PrintTaskLine(headerSize);
-            PrintTaskHeader(headerSize);
-            PrintTaskLine(headerSize);
-            std::cout << "| ID | Name | Date | Description |\n";
+            for (int i = 0; i < headerElements.size(); i++) {
+                std::cout << "| ";
+                if ((headerSize[i + 1] - headerElements[i].size())) {
+                    for (int j = 0;
+                         j < headerSize[i + 1] - headerElements[i].size();
+                         j++) {
+                        if (j ==
+                            (headerSize[i + 1] - (headerElements[i].size())) /
+                                2) {
+                            std::cout << headerElements[i];
+                        }
+                        std::cout << ' ';
+                    }
+                } else {
+                    std::cout << headerElements[i];
+                }
+                std::cout << ' ';
+            }
+            std::cout << "|\n";
 
+            // The loop bellow is to make it so task fields add up to the size
+            // neded to not break the template. eg: |   idvalue |
             for (int i = 0; i < taskVector.size(); i++) {
                 PrintTaskLine(headerSize);
                 for (int j = 0; j < taskVector[i].size(); j++) {
@@ -74,57 +107,49 @@ struct outputTemplate {
                 std::cout << '|';
                 std::cout << '\n';
             }
-            PrintTaskLine(headerSize);
         }
 
-    private:
-        std::vector<int> GetHeaderSize(
-            std::vector<std::array<std::string, 4>> taskVector) {
-            std::vector<int> elementsSize;
+        std::array<int, 5> GetHeaderSize(
+            std::vector<std::array<std::string, 4>> &taskVector) {
+            std::array<int, 5> elementsSize{
+                0,
+                0,
+                0,
+                0,
+                0,
+            };  // If it doesnt get initialized it breaks, for some reason
+            int result = 0;
+
             if (taskVector.empty()) {
                 return {32};
             }
-            int headerSize = 0, lineSize = 0, index = 0;
             for (int i = 0; i < taskVector.size(); i++) {
-                lineSize = 0;
-                for (std::string y : taskVector[i]) {
-                    lineSize += y.size();
-                }
-                if (lineSize > headerSize) {
-                    headerSize = lineSize;
-                    index      = i;
+                for (int j = 0; j < taskVector.size() - 1; j++) {
+                    if (taskVector[i][j].size() > elementsSize[j + 1]) {
+                        elementsSize[j + 1] = taskVector[i][j].size();
+                    }
                 }
             }
-            elementsSize[0] = taskVector[index][0].size();
-            elementsSize[1] = taskVector[index][1].size();
-            elementsSize[2] = taskVector[index][2].size();
-            elementsSize[3] = taskVector[index][3].size();
-            // Note: The code above can be easily improved
+            for (int x : elementsSize) {
+                result += x;
+            }
+            result += 11;  // Amount of spaces and |
+            elementsSize[0] = result;
 
-            if (taskVector[index][0].size() < 2) {
-                headerSize++;
-            }
-            if (taskVector[index][1].size() < 4) {
-                headerSize += 4 - taskVector[index][1].size();
-            }
-            if (taskVector[index][2].size() < 4) {
-                headerSize += 4 - taskVector[index][2].size();
-            }
-            if (taskVector[index][3].size() < 11) {
-                headerSize += 11 - taskVector[index][3].size();
-            }
-            headerSize += 11;  // Value of spaces and '|'
-            return {headerSize};
+            return elementsSize;
         }
-        void PrintTaskLine(std::vector<int> &lineSize) {
+        void PrintTaskLine(std::array<int, 5> lineSize) {
             std::cout << "+";
+            if (lineSize[0] < 32) {
+                lineSize[0] = 32;
+            }
             for (int i = 0; i < lineSize[0]; i++) {
                 std::cout << "-";
             }
             std::cout << "+\n";
         }
 
-        void PrintTaskHeader(std::vector<int> &headerSize) {
+        void PrintTaskHeader(std::array<int, 5> headerSize) {
             if (headerSize[0] < 32) {
                 headerSize[0] = 32;  // Note: Possible error
             }
@@ -208,9 +233,11 @@ void cmdShow() {
     libconfig::Config cfg;
     std::string path = GetTaskPathFromConfigFile();
     std::vector<std::array<std::string, 4>> taskVector;
+
     std::string taskPath = GetTaskPathFromConfigFile();
     outputTemplate print;
 
+    // ----------------------------------
     if (Tokens.size() < 2) {
         int last = taskPath.find_last_of("/");
         std::cout << "Possible Labels:\n";
@@ -224,6 +251,7 @@ void cmdShow() {
         return;
     }
 
+    // ----------------------------------
     if (Tokens[1] == "all") {
         for (const auto &entry :
              std::filesystem::directory_iterator(taskPath)) {
@@ -260,10 +288,11 @@ void cmdShow() {
                 return;
             }
         }
-        print.PrintTaskInfo(taskVector);
+        print.PrintAllTasks(taskVector);
         return;
     }
 
+    // ----------------------------------
     path += Tokens[1] + ".cfg";
     try {
         cfg.readFile(path);
@@ -296,10 +325,13 @@ void cmdShow() {
         std::cerr << "Didn't find Tasks\n";
         return;
     }
-    print.PrintTaskInfo(taskVector);
+    print.PrintAllTasks(taskVector);
     return;
+
+    // ----------------------------------
     std::cout << "Wrong use of command\n";
     return;
+    // ----------------------------------
 }
 
 void cmdCreate() {

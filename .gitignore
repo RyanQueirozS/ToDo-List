@@ -1,4 +1,5 @@
 *.o
+install_manifest.txt
 config.log
 CMakeCache.txt
 todo.md
