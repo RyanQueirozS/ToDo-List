@@ -64,9 +64,10 @@ struct outputTemplate {
                          j < headerSize[i + 1] - headerElements[i].size();
                          j++) {
                         if (j ==
-                            (headerSize[i + 1] - (headerElements[i].size())) /
+                            (headerSize[i + 1] - headerElements[i].size()) /
                                 2) {
                             std::cout << headerElements[i];
+                            // std::cout << headerSize[5];
                         }
                         std::cout << ' ';
                     }
@@ -79,44 +80,32 @@ struct outputTemplate {
 
             // The loop bellow is to make it so task fields add up to the size
             // neded to not break the template. eg: |   idvalue |
-            for (int i = 0; i < taskVector.size(); i++) {
+            for (int i = 1; i < taskVector.size(); i++) {
                 PrintTaskLine(headerSize);
+                std::cout << "| ";
                 for (int j = 0; j < taskVector[i].size(); j++) {
-                    std::cout << "| ";
-                    if (j == 0 && taskVector[i][j].size() == 1) {
-                        std::cout << " ";
-                    }
-                    if (j == 1 && taskVector[i][j].size() < 4) {
-                        for (int k = 0; k < 4 - taskVector[i][j].size(); k++) {
-                            std::cout << " ";
+                    int sex = headerSize[j + 1];
+                    int sox = taskVector[i][j].size();
+                    if (sex - sox > 0) {
+                        for (int k = 0; k < sex - sox; k++) {
+                            std::cout << ' ';
                         }
                     }
-                    if (j == 2 && taskVector[i][j].size() < 4) {
-                        for (int k = 0; k < 4 - taskVector[i][j].size(); k++) {
-                            std::cout << " ";
-                        }
-                    }
-                    if (j == 3 && taskVector[i][j].size() < 11) {
-                        for (int k = 0; k < (11 - taskVector[i][j].size());
-                             k++) {
-                            std::cout << " ";
-                        }
-                    }
-                    std::cout << taskVector[i][j] << " ";
+                    std::cout << taskVector[i][j];
+                    std::cout << " | ";
                 }
-                std::cout << '|';
-                std::cout << '\n';
+                std::cout << "\n";
             }
         }
 
         std::array<int, 5> GetHeaderSize(
-            std::vector<std::array<std::string, 4>> &taskVector) {
+            std::vector<std::array<std::string, 4>> taskVector) {
             std::array<int, 5> elementsSize{
                 0,
-                0,
-                0,
-                0,
-                0,
+                2,
+                4,
+                4,
+                11,
             };  // If it doesnt get initialized it breaks, for some reason
             int result = 0;
 
@@ -124,7 +113,7 @@ struct outputTemplate {
                 return {32};
             }
             for (int i = 0; i < taskVector.size(); i++) {
-                for (int j = 0; j < taskVector.size() - 1; j++) {
+                for (int j = 0; j < taskVector[i].size(); j++) {
                     if (taskVector[i][j].size() > elementsSize[j + 1]) {
                         elementsSize[j + 1] = taskVector[i][j].size();
                     }
@@ -168,9 +157,10 @@ struct outputTemplate {
 };
 
 std::string GetCurrentExecutablePath() {
-    // For the time being this application doesn't work on windows due to the
-    // binaries for cmake and the compiler not existing in the same path as it
-    // is on linux.This function has virtually no value until I fix it.
+    // For the time being this application doesn't work on windows due
+    // to the binaries for cmake and the compiler not existing in the
+    // same path as it is on linux.This function has virtually no value
+    // until I fix it.
 
     // On the future I may fix this, or may simply make it only a linux
     // aplication and delete this function.
@@ -224,7 +214,8 @@ void cmdHelp() {
         return;
     }
     std::cout << "Unable to display all commands\n"
-              << "Check if \"helpCommand.txt\" exists in the /doc directory\n";
+              << "Check if \"helpCommand.txt\" exists in the /doc "
+                 "directory\n";
     helpText.close();
     return;
 }
@@ -232,7 +223,9 @@ void cmdHelp() {
 void cmdShow() {
     libconfig::Config cfg;
     std::string path = GetTaskPathFromConfigFile();
-    std::vector<std::array<std::string, 4>> taskVector;
+    std::vector<std::array<std::string, 4>> taskVector{
+        {"", "", "", ""}
+    };
 
     std::string taskPath = GetTaskPathFromConfigFile();
     outputTemplate print;
@@ -349,7 +342,7 @@ void cmdCreate() {
     }
     for (int i = 0; i < 4; i++) {
         std::cout << "Enter the Task's " << textArray[i];
-        std::cin >> taskObjectsArray[i];
+        std::getline(std::cin, taskObjectsArray[i]);
     }
     Task task(taskObjectsArray[0],
               id,
@@ -369,7 +362,8 @@ void cmdDelete() {
         std::cout << "Are you sure you want to delete all tasks?[y/n]\n> ";
         std::getline(std::cin, ans);
         if (ans == "y" || ans == "yes") {
-            std::cout << "Type in all caps \"i want to delete all tasks\"\n> ";
+            std::cout << "Type in all caps \"i want to delete all "
+                         "tasks\"\n> ";
             std::getline(std::cin, ans);
 
             if (ans == "I WANT TO DELETE ALL TASKS") {
@@ -402,7 +396,8 @@ void cmdDelete() {
                      "label?[y/n]\n> ";
         std::getline(std::cin, ans);
         if (ans == "y" || ans == "yes") {
-            std::cout << "Type in all caps \"i want to delete all tasks\"\n> ";
+            std::cout << "Type in all caps \"i want to delete all "
+                         "tasks\"\n> ";
             std::getline(std::cin, ans);
 
             if (ans == "I WANT TO DELETE ALL TASKS") {

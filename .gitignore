@@ -1,5 +1,14 @@
+#random
 *.o
-install_manifest.txt
 config.log
+
+# Cmake
 CMakeCache.txt
+./src/CMakeFiles
+./src/cmake_install.cmake
+Makefile
+cmake_install.cmake
+./CMakeFiles
+
+# personal
 todo.md
