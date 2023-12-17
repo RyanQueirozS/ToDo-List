@@ -1,6 +1,0 @@
-/home/ryan/projects/cpp/ToDo-List/CMakeFiles/todoc.dir
-/home/ryan/projects/cpp/ToDo-List/CMakeFiles/edit_cache.dir
-/home/ryan/projects/cpp/ToDo-List/CMakeFiles/rebuild_cache.dir
-/home/ryan/projects/cpp/ToDo-List/src/CMakeFiles/src.dir
-/home/ryan/projects/cpp/ToDo-List/src/CMakeFiles/edit_cache.dir
-/home/ryan/projects/cpp/ToDo-List/src/CMakeFiles/rebuild_cache.dir

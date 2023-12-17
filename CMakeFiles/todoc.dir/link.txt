@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/todoc.dir/src/main.cpp.o -o todoc  src/libsrc.a -lconfig++ 
