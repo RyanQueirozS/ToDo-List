@@ -1,11 +1,11 @@
 #include <array>
-#include <cmath>
 #include <filesystem>
 #include <fstream>
 #include <functional>
 #include <iostream>
 #include <iterator>
 #include <libconfig.h++>
+#include <ostream>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -81,13 +81,17 @@ struct outputTemplate {
             // The loop bellow is to make it so task fields add up to the size
             // neded to not break the template. eg: |   idvalue |
             for (int i = 1; i < taskVector.size(); i++) {
+                std::vector<std::array<char, 20>> lineVector{};
                 PrintTaskLine(headerSize);
+
                 std::cout << "| ";
                 for (int j = 0; j < taskVector[i].size(); j++) {
-                    int sex = headerSize[j + 1];
-                    int sox = taskVector[i][j].size();
-                    if (sex - sox > 0) {
-                        for (int k = 0; k < sex - sox; k++) {
+                    int headerSz = headerSize[j + 1],
+                        taskSz = taskVector[i][j].size(), pos = 0;
+                    if (headerSz - taskSz > 0) {
+                        // lineVector.push_back(taskVector[i][j].substr(pos,
+                        // 20));
+                        for (int k = 0; k < headerSz - taskSz; k++) {
                             std::cout << ' ';
                         }
                     }
@@ -195,9 +199,24 @@ void cmdSet() {
               << "Your executable path for reference: "
               << GetCurrentExecutablePath() << "\n> ";
     std::cin >> envSettingsArray[0];
-    std::cout << "Set Date Format:\n> ";
-    std::cin >> envSettingsArray[1];
+    std::cout << "Set Date/Time Format: [a^]DD/MM [b]MM/DD [c]custom\n> ";
+    char dateTimeFormat;
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    system("stty raw");  // Sets term to raw
+    dateTimeFormat = getchar();
+    system("stty cooked");  // Resets term
+
+    envSettingsArray[1] = "DD/MM";
+    if (dateTimeFormat == 'b') {
+        envSettingsArray[1] = "MM/DD";
+    }
+    if (dateTimeFormat == 'c') {
+        std::cout << "Set your custom Date/Time format: ";
+        std::cin >> (envSettingsArray[1]);
+    }
     SetupUserEnvironment(envSettingsArray);
+    std::cout << '\n';
     return;
 }
 
@@ -222,21 +241,21 @@ void cmdHelp() {
 
 void cmdShow() {
     libconfig::Config cfg;
-    std::string path = GetTaskPathFromConfigFile();
+    std::string path = GetTaskPathFromCfg();
     std::vector<std::array<std::string, 4>> taskVector{
         {"", "", "", ""}
     };
 
-    std::string taskPath = GetTaskPathFromConfigFile();
+    std::string taskPath = GetTaskPathFromCfg();
     outputTemplate print;
 
     // ----------------------------------
     if (Tokens.size() < 2) {
-        int last = taskPath.find_last_of("/");
+        int taskName = taskPath.find_last_of("/");
         std::cout << "Possible Labels:\n";
         for (const auto &entry :
              std::filesystem::directory_iterator(taskPath)) {
-            std::cout << " - " << entry.path().string().substr(last + 1)
+            std::cout << " - " << entry.path().string().substr(taskName + 1)
                       << "\n";
         }
         std::cout << "NOTE:You do not need to include '.cfg' when using this "
@@ -332,7 +351,7 @@ void cmdCreate() {
     const std::array<std::string, 4> textArray = {
         "Label:\n> ",
         "Name:\n> ",
-        "Date(DD:MM):\n> ",
+        "",
         "Description:\n> ",
     };
     const uint id = GenerateTaskID();
@@ -340,7 +359,33 @@ void cmdCreate() {
     if (id == 0) {  // This is just a way to get a invalid ID, check the
         return;     // generateTaskID function
     }
-    for (int i = 0; i < 4; i++) {
+
+    for (int i = 0; i < textArray.size(); i++) {
+        if (i == 2) {
+            char _input, date[6]{"DD/MM"};
+            for (int j = 0; j < sizeof(date) - 1; j++) {
+                std::cout << "\b\bEnter Date in the given format: " << date
+                          << "\n> ";
+                if (j == 2) {
+                    j++;  // char |
+                }
+                {
+                    // This is to get the date in a format in real time
+                    system("stty raw");  // Sets term to raw
+                    _input = getchar();
+                    system("stty cooked");  // Resets term
+                    std::cout << "\x1b[1A"
+                              << "\x1b[2K"
+                              << "\b";
+                }
+                date[j] = _input;
+            }
+            std::cout << "\b\bEnter Date in the given format:\n> " << date
+                      << "\n";
+            i++;
+            taskObjectsArray[2] = date;
+        }
+
         std::cout << "Enter the Task's " << textArray[i];
         std::getline(std::cin, taskObjectsArray[i]);
     }
@@ -356,7 +401,7 @@ void cmdDelete() {
         std::cout << "Wrong use of command\n";
         return;
     }
-    std::string path = GetTaskPathFromConfigFile();
+    std::string path = GetTaskPathFromCfg();
     if (Tokens[1] == "all") {
         std::string ans;
         std::cout << "Are you sure you want to delete all tasks?[y/n]\n> ";
@@ -457,7 +502,7 @@ void cmdEdit() {
         return;
     }
 
-    const std::string path = GetTaskPathFromConfigFile() + Tokens[1] + ".cfg";
+    const std::string path = GetTaskPathFromCfg() + Tokens[1] + ".cfg";
     libconfig::Config cfg;
 
     cmdShow();
@@ -544,6 +589,8 @@ void ExecuteCommands() {
             commandsMap[Tokens[0]]();
         } else if (Tokens[0] == "exit") {
             break;
+        } else if (Tokens[0] == "clear") {
+            std::cout << "\033[2J\033[1;1H";
         }
     }
 }

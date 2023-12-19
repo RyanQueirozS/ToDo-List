@@ -6,9 +6,8 @@
 
 #include "../lib/Commands.hpp"
 #include "../lib/Environment.hpp"
-#include "../lib/Task.hpp"
 
-std::string GetTaskPathFromConfigFile() {
+std::string GetTaskPathFromCfg() {
     libconfig::Config cfg;
     try {
         cfg.readFile(GetCurrentExecutablePath() + "/doc/config.cfg");
@@ -29,8 +28,32 @@ std::string GetTaskPathFromConfigFile() {
     }
 }
 
-void SetupUserEnvironment(std::array<std::string, 2> &envSettingsArray) {
+char *GetDateTimeFormatFromCfg() {
+    char *format;
     libconfig::Config cfg;
+    std::string exec_path = GetCurrentExecutablePath();
+
+    try {
+        cfg.readFile(GetCurrentExecutablePath() + "/doc/config.cfg");
+    } catch (const libconfig::FileIOException &fioex) {
+        std::cout << "I/O error while reading file.\n";
+        return {};
+    } catch (const libconfig::ParseException &pex) {
+        std::cerr << "Parse error at " << pex.getFile() << ":" << pex.getLine()
+                  << " - " << pex.getError() << '\n';
+        return {};
+    }
+    try {
+        std::string path = cfg.lookup("date_format");
+        return {};
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        std::cerr << "No 'Date Format' setting in configuration file.\n";
+        return {};
+    }
+    return format;
+}
+
+void SetupUserEnvironment(std::array<std::string, 2> envSettingsArray) {
     std::string exec_path = GetCurrentExecutablePath();
     std::ofstream configFile(exec_path + "/doc/config.cfg");
 

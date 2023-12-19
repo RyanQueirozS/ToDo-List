@@ -1,4 +1,6 @@
-show <args>                   --displays tasks in a table | <args> = "all" or "task_label"
-create                        --creates task
-edit                          --edits tasks
-set                           --sets environment
+show <args>                     --displays tasks in a table | <args> = "all" or "task_label"
+create                          --creates task
+delete                          --deletes task
+edit                            --edits tasks
+set                             --sets environment
+clear                           --clears screen

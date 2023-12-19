@@ -2,5 +2,7 @@
 
 #include <string>
 
-std::string GetTaskPathFromConfigFile();
-void SetupUserEnvironment(std::array<std::string, 2>&);
+std::string GetTaskPathFromCfg();
+char* GetDateTimeFormatFromCfg();
+
+void SetupUserEnvironment(std::array<std::string, 2>);
