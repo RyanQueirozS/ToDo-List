@@ -1,3 +1,5 @@
+#include "../lib/Task.hpp"
+
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -6,7 +8,6 @@
 
 #include "../lib/Commands.hpp"
 #include "../lib/Environment.hpp"
-#include "../lib/Task.hpp"
 
 Task::Task(std::string label,
            uint id,
@@ -66,7 +67,7 @@ void Task::SaveTask() {
         return;
     }
 
-    std::string path       = GetTaskPathFromConfigFile();
+    std::string path       = GetTaskPathFromCfg();
     std::string outputFile = path + LABEL + ".cfg";
     bool directory         = std::filesystem::create_directory(path) ||
                      std::filesystem::is_directory(path);

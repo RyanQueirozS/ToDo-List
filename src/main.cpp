@@ -9,5 +9,6 @@ int main() {
                  "|                                    |\n"
                  "+------------------------------------+\n"
                  "Type [h]elp for help and 'exit' to quit\n";
+
     ExecuteCommands();
 }

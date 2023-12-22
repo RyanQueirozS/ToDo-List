@@ -1,3 +1,5 @@
+#include "../lib/Commands.hpp"
+
 #include <array>
 #include <filesystem>
 #include <fstream>
@@ -10,7 +12,6 @@
 #include <unordered_map>
 #include <vector>
 
-#include "../lib/Commands.hpp"
 #include "../lib/Environment.hpp"
 #include "../lib/Task.hpp"
 
@@ -212,7 +213,7 @@ void cmdSet() {
         envSettingsArray[1] = "MM/DD";
     }
     if (dateTimeFormat == 'c') {
-        std::cout << "Set your custom Date/Time format: ";
+        std::cout << "\nSet your custom Date/Time format: ";
         std::cin >> (envSettingsArray[1]);
     }
     SetupUserEnvironment(envSettingsArray);
@@ -362,12 +363,14 @@ void cmdCreate() {
 
     for (int i = 0; i < textArray.size(); i++) {
         if (i == 2) {
-            char _input, date[6]{"DD/MM"};
-            for (int j = 0; j < sizeof(date) - 1; j++) {
+            char _input;
+            std::string date         = GetDateTimeFormatFromCfg(),
+                        dateTemplate = GetDateTimeFormatFromCfg();
+            for (int j = 0; j < date.size(); j++) {
                 std::cout << "\b\bEnter Date in the given format: " << date
                           << "\n> ";
-                if (j == 2) {
-                    j++;  // char |
+                if (date.at(j) == '/') {
+                    j++;
                 }
                 {
                     // This is to get the date in a format in real time
@@ -378,7 +381,21 @@ void cmdCreate() {
                               << "\x1b[2K"
                               << "\b";
                 }
-                date[j] = _input;
+                if (!isdigit(_input) && _input != 127) {
+                    _input = '0';  // It still does break if _input == ctrl+c
+                }
+                if (_input == 127) {  // checks for backspace
+                    if (j != 0) {
+                        if (date.at(j - 1) == '/') {
+                            j--;
+                        }
+                        date.at(j - 1) = dateTemplate.at(j - 1);
+                        j--;
+                    }
+                    j--;
+                } else [[likely]] {
+                    date.at(j) = _input;
+                }
             }
             std::cout << "\b\bEnter Date in the given format:\n> " << date
                       << "\n";
@@ -404,7 +421,7 @@ void cmdDelete() {
     std::string path = GetTaskPathFromCfg();
     if (Tokens[1] == "all") {
         std::string ans;
-        std::cout << "Are you sure you want to delete all tasks?[y/n]\n> ";
+        std::cout << "Are you sure you want to delete all tasks?[y/N]\n> ";
         std::getline(std::cin, ans);
         if (ans == "y" || ans == "yes") {
             std::cout << "Type in all caps \"i want to delete all "
