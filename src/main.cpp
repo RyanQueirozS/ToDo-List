@@ -11,4 +11,5 @@ int main() {
                  "Type [h]elp for help and 'exit' to quit\n";
 
     ExecuteCommands();
+    std::cout << "Exited" << std::endl;
 }
